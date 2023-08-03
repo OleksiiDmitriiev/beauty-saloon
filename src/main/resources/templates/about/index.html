@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>BeautySaloon</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href=" css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+<div class="hero_area">
+  <!-- header section strats -->
+  <header class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg custom_nav-container d-block">
+        <div class="main_nav_menu">
+          <div class="fk_width">
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <span class="s-1"> </span>
+                <span class="s-2"> </span>
+                <span class="s-3"> </span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="" href="/about">About </a>
+                <a class="" href="/masters">Masters </a>
+                <a class="" href="/services">Services </a>
+                <a class="" href="/blog">Blog </a>
+              </div>
+            </div>
+          </div>
+          <a class="navbar-brand" href="">
+              <span>
+                BeautySaloon
+              </span>
+          </a>
+          <div class="user_option">
+            <a href="/login">
+              login
+            </a>
+            <a th:href="@{/services/search}" class="btn nav_search-btn"></a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- end header section -->
+
+  <!-- slider section -->
+  <!-- gallery section -->
+  <section class="gallery_section layout_padding">
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 ml-auto">
+          <div class="heading_container">
+            <h2>
+              About our site
+            </h2>
+            <p>
+            Welcome to our innovative platform connecting talented beauty salon masters with clients seeking exceptional services. Our platform serves as a bridge, empowering skilled beauty professionals to showcase their expertise and enabling clients to easily access a wide range of beauty services.
+            </p>
+            <p></p>
+            <p>
+            At our site, beauty salon masters have the opportunity to create a personalized profile, highlighting their unique skills, qualifications, and specialties. They can showcase their portfolio, share testimonials from satisfied clients, and provide detailed information about the services they offer.
+            </p>
+            <p></p>
+            <p>
+            For clients, our platform simplifies the process of finding and booking beauty services. With just a few clicks, clients can explore a diverse selection of services, ranging from haircuts, styling, and coloring to manicures, pedicures, facials, and more. They can browse through profiles of talented beauty salon masters, review their work, and choose the one that best fits their needs.
+            </p>
+            <p></p>
+            <p>
+            Our platform also emphasizes convenience and flexibility. Clients can easily schedule appointments online, saving them valuable time and eliminating the hassle of phone calls and back-and-forth coordination. They can manage their bookings, receive reminders, and communicate directly with their chosen beauty salon master to ensure a seamless experience.
+            </p>
+            <p></p>
+            <p>
+            We prioritize the highest standards of quality and professionalism. All beauty salon masters on our platform are carefully vetted, ensuring that they possess the necessary skills, qualifications, and experience. We are committed to maintaining a trusted and reliable community where clients can confidently choose their preferred beauty professionals.
+            </p>
+            <p></p>
+            <p>
+            Whether you're a beauty salon master looking to expand your clientele or a client in search of top-notch beauty services, our platform is here to meet your needs. Join our growing community today and experience the convenience, expertise, and creativity that our beauty salon platform has to offer.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- end gallery section -->
+
+  <!-- info section -->
+
+
+  <!-- end slider section -->
+  </section>
+</div>
+
+
+<section class="info_section ">
+  <div class="info_container layout_padding-top">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Contact Us
+        </h2>
+      </div>
+      <div class="info_main">
+        <div class="row">
+          <div class="col-md-4 col-lg-3">
+            <div class="info_contact ">
+              <a href="#" class="link-box">
+                <div class="img-box">
+                  <img src="/images/location.png" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h6>
+                    Location
+                  </h6>
+                </div>
+              </a>
+              <a href="#" class="link-box">
+                <div class="img-box">
+                  <img src="/images/mail.png" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h6>
+                    demo@gmail.com
+                  </h6>
+                </div>
+              </a>
+              <a href="#" class="link-box">
+                <div class="img-box">
+                  <img src="/images/call.png" alt="" />
+                </div>
+                <div class="detail-box">
+                  <h6>
+                    Call +01 1234567890
+                  </h6>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-lg-3">
+            <div class="info_link-box">
+              <ul>
+                <li class=" ">
+                  <a class="" href="/">Home </a>
+                </li>
+                <li class="">
+                  <a class="" href="/about">About </a>
+                </li>
+                <li class="">
+                  <a class="" href="/masters">Masters</a>
+                </li>
+                <li class="">
+                  <a class="" href="/services">Services </a>
+                </li>
+                <li class="">
+                  <a class="" href="/blog">Blog </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer section -->
+<footer class="footer_section">
+  <div class="container">
+    <p>
+      &copy; 2023 All Rights Reserved. Design by
+      <a href="https://html.design/">HTML Design</a>
+    </p>
+  </div>
+</footer>
+<!-- footer section -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- custom script -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

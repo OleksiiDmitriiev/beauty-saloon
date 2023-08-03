@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>BeautySaloon</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- Custom styles for this template -->
+    <link href=" css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container d-block">
+                <div class="main_nav_menu">
+                    <div class="fk_width">
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <span class="s-1"> </span>
+                                <span class="s-2"> </span>
+                                <span class="s-3"> </span>
+                            </button>
+                        </div>
+                        <div id="myNav" class="overlay">
+                            <div class="overlay-content">
+                                <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+                                <a class="" href="/about">About </a>
+                                <a class="" href="/masters">Masters </a>
+                                <a class="" href="/services">Services </a>
+                                <a class="" href="/blog">Blog </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" href="">
+              <span>
+                BeautySaloon
+              </span>
+                    </a>
+                    <div class="user_option">
+                        <a href="/login">
+                            login
+                        </a>
+                        <a th:href="@{/services/search}" class="btn nav_search-btn"></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+
+    <!-- slider section -->
+    <!-- gallery section -->
+    <section class="gallery_section layout_padding">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+
+                        <h2>
+                            Our Services
+                        </h2>
+                        <a href="/services/search">Find service by name</a>
+                        <P></P>
+                        <p>
+                            Click on them to see more.
+                        </p>
+
+                        <div th:each="service : ${services}">
+                            <a th:href="@{/services/{id}(id=${service.getId()})}"
+                               th:text="${service.getServiceName() + ' | Rating: ' + service.getServiceRating()}">service</a>
+                        </div>
+                        <P></P>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" th:class="${currentPage == 0} ? 'disabled' : ''">
+                                    <a class="page-link" th:if="${currentPage > 0}" th:href="@{/services(pageNumber=${currentPage - 1}, pageSize=${pageSize})}">Previous</a>
+                                </li>
+                                <li class="page-item" th:class="${nextPage >= totalPages} ? 'disabled' : ''">
+                                    <a class="page-link" th:if="${nextPage < totalPages}" th:href="@{/services(pageNumber=${currentPage + 1}, pageSize=${pageSize})}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end gallery section -->
+
+    <!-- info section -->
+
+
+    <!-- end slider section -->
+</div>
+
+<section class="info_section ">
+    <div class="info_container layout_padding-top">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Contact Us
+                </h2>
+            </div>
+            <div class="info_main">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="info_contact ">
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/location.png" alt="" />
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        Location
+                                    </h6>
+                                </div>
+                            </a>
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/mail.png" alt="" />
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        demo@gmail.com
+                                    </h6>
+                                </div>
+                            </a>
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/call.png" alt="" />
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        Call +01 1234567890
+                                    </h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-3">
+                        <div class="info_link-box">
+                            <ul>
+                                <li class=" ">
+                                    <a class="" href="/">Home </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/aboutl">About </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/masters">Masters</a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/services">Services </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/blog">Blog </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- footer section -->
+<footer class="footer_section">
+    <div class="container">
+        <p>
+            &copy; 2023 All Rights Reserved. Design by
+            <a href="https://html.design/">HTML Design</a>
+        </p>
+    </div>
+</footer>
+<!-- footer section -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- custom script -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>BeautySaloon</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet" />
+
+
+</head>
+<body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <div th:insert="samples/sample :: header"></div>
+    <!-- end header section -->
+
+    <!-- slider section -->
+    <!-- gallery section -->
+    <section class="gallery_section layout_padding">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+
+                        <a href="/clients/search">Find client by email</a>
+                        <p></p>
+                        <div th:each="client : ${clients}">
+                            <a th:href="@{/clients/{id}(id=${client.getId()})}"
+                               th:text="${ client.getClientName() + ' | ' + client.getClientEmail() }">master</a>
+                        </div>
+
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" th:class="${currentPage == 0} ? 'disabled' : ''">
+                                    <a class="page-link" th:if="${currentPage > 0}" th:href="@{/clients(pageNumber=${currentPage - 1}, pageSize=${pageSize})}">Previous</a>
+                                </li>
+                                <li class="page-item" th:class="${nextPage >= totalPages} ? 'disabled' : ''">
+                                    <a class="page-link" th:if="${nextPage < totalPages}" th:href="@{/clients(pageNumber=${currentPage + 1}, pageSize=${pageSize})}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <br/>
+                        <hr/>
+
+                        <a href="/clients/new">Create new Client</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end gallery section -->
+
+    <!-- info section -->
+
+
+    <!-- end slider section -->
+</div>
+
+<div th:insert="samples/sample :: info-section"></div>
+
+<!-- footer section -->
+<div th:insert="samples/sample :: footer"></div>
+<!-- footer section -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- custom script -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

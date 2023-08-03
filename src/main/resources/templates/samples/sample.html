@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+</head>
+<body>
+
+<div th:fragment="header">
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container d-block">
+                    <div class="main_nav_menu">
+                        <div class="fk_width">
+                            <div class="custom_menu-btn">
+                                <button onclick="openNav()">
+                                    <span class="s-1"> </span>
+                                    <span class="s-2"> </span>
+                                    <span class="s-3"> </span>
+                                </button>
+                            </div>
+                            <div id="myNav" class="overlay">
+                                <div class="overlay-content">
+                                    <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+                                    <a class="" href="/about">About </a>
+                                    <a class="" href="/masters">Masters </a>
+                                    <a class="" href="/services">Services </a>
+                                    <a class="" href="/blog">Blog </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="navbar-brand" href="">
+              <span>
+                BeautySaloon
+              </span>
+                        </a>
+                        <div class="user_option">
+                            <a href="/login">
+                                login
+                            </a>
+                            <a th:href="@{/services/search}" class="btn nav_search-btn"></a>
+
+                            <!--                            <form class="form-inline ">-->
+<!--                                <button class="btn  nav_search-btn" type="submit"></button>-->
+<!--                            </form>-->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <div class="container">
+        <p>
+            &copy; 2023 All Rights Reserved. Design by
+            <a href="https://html.design/">HTML Design</a>
+        </p>
+    </div>
+</div>
+
+<div th:fragment="info-section">
+    <section class="info_section ">
+        <div class="info_container layout_padding-top">
+            <div class="container">
+                <div class="heading_container">
+                    <h2>
+                        Contact Us
+                    </h2>
+                </div>
+                <div class="info_main">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="info_contact ">
+                                <a href="#" class="link-box">
+                                    <div class="img-box">
+                                        <img src="/images/location.png" alt="" />
+                                    </div>
+                                    <div class="detail-box">
+                                        <h6>
+                                            Location
+                                        </h6>
+                                    </div>
+                                </a>
+                                <a href="#" class="link-box">
+                                    <div class="img-box">
+                                        <img src="/images/mail.png" alt="" />
+                                    </div>
+                                    <div class="detail-box">
+                                        <h6>
+                                            demo@gmail.com
+                                        </h6>
+                                    </div>
+                                </a>
+                                <a href="#" class="link-box">
+                                    <div class="img-box">
+                                        <img src="/images/call.png" alt="" />
+                                    </div>
+                                    <div class="detail-box">
+                                        <h6>
+                                            Call +01 1234567890
+                                        </h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-lg-3">
+                            <div class="info_link-box">
+                                <ul>
+                                    <li class=" ">
+                                        <a class="" href="/">Home </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="/about">About </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="/masters">Masters</a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="/services">Services </a>
+                                    </li>
+                                    <li class="">
+                                        <a class="" href="/blog">Blog </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div th:fragment="body-section">
+    <section class="gallery_section layout_padding">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

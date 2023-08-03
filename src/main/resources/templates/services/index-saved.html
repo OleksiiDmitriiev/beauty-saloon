@@ -1,0 +1,304 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Index</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div th:each="service : ${services}">&ndash;&gt;-->
+<!--&lt;!&ndash;    <a th:href="@{/services/{id}(id=${service.getId()})}"&ndash;&gt;-->
+<!--&lt;!&ndash;       th:text="${'Name: '  + service.getServiceName() + ', Rating: ' + service.getServiceRating() + ', Service master:  ' + service.getMasterOwner().getId() + ' Master name: ' + service.getMasterOwner().getMasterName()}">service</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<br/>&ndash;&gt;-->
+<!--&lt;!&ndash;<hr/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<a href="/services/new">Create new Service</a>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--&lt;!&ndash;SAVED VERSION&ndash;&gt;-->
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  &lt;!&ndash; Basic &ndash;&gt;-->
+<!--  <meta charset="utf-8" />-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+<!--  &lt;!&ndash; Mobile Metas &ndash;&gt;-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />-->
+<!--  &lt;!&ndash; Site Metas &ndash;&gt;-->
+<!--  <meta name="keywords" content="" />-->
+<!--  <meta name="description" content="" />-->
+<!--  <meta name="author" content="" />-->
+
+<!--  <title>BeautySaloon</title>-->
+
+<!--  &lt;!&ndash; slider stylesheet &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />-->
+
+<!--  &lt;!&ndash; bootstrap core css &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />-->
+
+<!--  &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--  <link href=" css/style.css" rel="stylesheet" />-->
+<!--  &lt;!&ndash; responsive style &ndash;&gt;-->
+<!--  <link href="css/responsive.css" rel="stylesheet" />-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="hero_area">-->
+<!--  &lt;!&ndash; header section strats &ndash;&gt;-->
+<!--  <header class="header_section">-->
+<!--    <div class="container-fluid">-->
+<!--      <nav class="navbar navbar-expand-lg custom_nav-container d-block">-->
+<!--        <div class="main_nav_menu">-->
+<!--          <div class="fk_width">-->
+<!--            <div class="custom_menu-btn">-->
+<!--              <button onclick="openNav()">-->
+<!--                <span class="s-1"> </span>-->
+<!--                <span class="s-2"> </span>-->
+<!--                <span class="s-3"> </span>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--            <div id="myNav" class="overlay">-->
+<!--              <div class="overlay-content">-->
+<!--                <a class="" href="">Home <span class="sr-only">(current)</span></a>-->
+<!--                <a class="" href="/about">About </a>-->
+<!--                <a class="" href="/masters">Masters </a>-->
+<!--                <a class="" href="/services">Services </a>-->
+<!--                <a class="" href="testimonial.html">Testimonial </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <a class="navbar-brand" href="">-->
+<!--              <span>-->
+<!--                BeautySaloon-->
+<!--              </span>-->
+<!--          </a>-->
+<!--          <div class="user_option">-->
+<!--            <a href="/login">-->
+<!--              login-->
+<!--            </a>-->
+<!--            <form class="form-inline ">-->
+<!--              <button class="btn  nav_search-btn" type="submit"></button>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </nav>-->
+<!--    </div>-->
+<!--  </header>-->
+<!--  &lt;!&ndash; end header section &ndash;&gt;-->
+
+<!--  &lt;!&ndash; slider section &ndash;&gt;-->
+<!--  &lt;!&ndash; gallery section &ndash;&gt;-->
+<!--  <section class="gallery_section layout_padding">-->
+
+
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-5 ml-auto">-->
+<!--          <div class="heading_container">-->
+
+<!--            <h2>-->
+<!--              Our Services-->
+<!--            </h2>-->
+<!--            <p>-->
+<!--              Here should be a list of services and description and maybe delete "see more" and photography-->
+<!--            </p>-->
+
+<!--            <div th:each="service : ${services}">-->
+<!--              <a th:href="@{/services/{id}(id=${service.getId()})}"-->
+<!--                 th:text="${'Name: '  + service.getServiceName() + ', Rating: ' + service.getServiceRating() + ', Service master:  ' + service.getMasterOwner().getId() + ' Master name: ' + service.getMasterOwner().getMasterName() + ' ' + service.getDescription()}">service</a>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="gallery_container">-->
+<!--      <div class="gallery_bg">-->
+<!--        <img src="images/gallery-bg.png" alt="" />-->
+<!--      </div>-->
+<!--      <div class="container">-->
+<!--        <div class="gallery_box">-->
+<!--          <div class="box b1">-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-1.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="box b2">-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-2.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-3.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="box b3">-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-4.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-5.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="box b4">-->
+<!--            <div class="img-box">-->
+<!--              <img src="images/gallery-6.jpg" alt="" />-->
+<!--              <h5>-->
+<!--                photography-->
+<!--              </h5>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!--  &lt;!&ndash; end gallery section &ndash;&gt;-->
+
+<!--  &lt;!&ndash; info section &ndash;&gt;-->
+
+
+<!--  &lt;!&ndash; end slider section &ndash;&gt;-->
+<!--</div>-->
+
+<!--<section class="info_section ">-->
+<!--  <div class="info_container layout_padding-top">-->
+<!--    <div class="container">-->
+<!--      <div class="heading_container">-->
+<!--        <h2>-->
+<!--          Contact Us-->
+<!--        </h2>-->
+<!--      </div>-->
+<!--      <div class="info_main">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-4 col-lg-3">-->
+<!--            <div class="info_contact ">-->
+<!--              <a href="#" class="link-box">-->
+<!--                <div class="img-box">-->
+<!--                  <img src="images/location.png" alt="" />-->
+<!--                </div>-->
+<!--                <div class="detail-box">-->
+<!--                  <h6>-->
+<!--                    Location-->
+<!--                  </h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--              <a href="#" class="link-box">-->
+<!--                <div class="img-box">-->
+<!--                  <img src="images/mail.png" alt="" />-->
+<!--                </div>-->
+<!--                <div class="detail-box">-->
+<!--                  <h6>-->
+<!--                    demo@gmail.com-->
+<!--                  </h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--              <a href="#" class="link-box">-->
+<!--                <div class="img-box">-->
+<!--                  <img src="images/call.png" alt="" />-->
+<!--                </div>-->
+<!--                <div class="detail-box">-->
+<!--                  <h6>-->
+<!--                    Call +01 1234567890-->
+<!--                  </h6>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-2 col-lg-3">-->
+<!--            <div class="info_link-box">-->
+<!--              <ul>-->
+<!--                <li class=" ">-->
+<!--                  <a class="" href="">Home </a>-->
+<!--                </li>-->
+<!--                <li class="">-->
+<!--                  <a class="" href="/aboutl">About </a>-->
+<!--                </li>-->
+<!--                <li class="">-->
+<!--                  <a class="" href="/masters">Masters</a>-->
+<!--                </li>-->
+<!--                <li class="">-->
+<!--                  <a class="" href="/services">Services </a>-->
+<!--                </li>-->
+<!--                <li class="">-->
+<!--                  <a class="" href="testimonial.html">Testimonial </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-6 col-lg-6">-->
+<!--            <div class="info_form">-->
+<!--              <h5>-->
+<!--                <i>-->
+<!--                  For any query, contact us-->
+<!--                </i>-->
+<!--              </h5>-->
+<!--              <form action="#" method="post">-->
+<!--                <div>-->
+<!--                  <input type="text" placeholder="Name" required />-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                  <input type="email" placeholder="Email" required />-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                  <input type="text" placeholder="Phone" required />-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                  <textarea placeholder="Message"></textarea>-->
+<!--                </div>-->
+<!--                <div class="mt-3">-->
+<!--                  <button type="submit">-->
+<!--                    Send-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; footer section &ndash;&gt;-->
+<!--<footer class="footer_section">-->
+<!--  <div class="container">-->
+<!--    <p>-->
+<!--      &copy; 2023 All Rights Reserved. Design by-->
+<!--      <a href="https://html.design/">HTML Design</a>-->
+<!--    </p>-->
+<!--  </div>-->
+<!--</footer>-->
+<!--&lt;!&ndash; footer section &ndash;&gt;-->
+
+<!--&lt;!&ndash; Javascript files &ndash;&gt;-->
+<!--&lt;!&ndash; jQuery &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--&lt;!&ndash; Bootstrap JS &ndash;&gt;-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>-->
+<!--&lt;!&ndash; custom script &ndash;&gt;-->
+<!--<script src="/js/custom.js"></script>-->
+<!--</body>-->
+<!--</html>-->

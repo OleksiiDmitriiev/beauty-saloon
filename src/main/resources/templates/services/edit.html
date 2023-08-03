@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>BeautySaloon</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <div th:insert="samples/sample :: header"></div>
+    <!-- end header section -->
+
+    <!-- slider section -->
+    <!-- gallery section -->
+    <section class="gallery_section layout_padding">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+
+                        <form th:method="PATCH" th:action="@{/services/{id}(id=${service.getId()})}"
+                              th:object="${service}">
+                            <label for="serviceName">Enter name: </label>
+                            <input type="text" th:field="*{serviceName}" id="serviceName" size="47"/>
+                            <div style="color:red" th:if="${#fields.hasErrors('serviceName')}"
+                                 th:errors="*{serviceName}">Name Error
+                            </div>
+                            <br/>
+                            <!--              <label for="masterOwner">Enter service master: </label>-->
+                            <!--              <input type="text" th:field="*{masterOwner}" id="masterOwner" size="47"/>-->
+                            <!--              <div style="color:red" th:if="${#fields.hasErrors('masterOwner')}" th:errors="*{masterOwner}">Master error</div>-->
+                            <!--              <br/>-->
+                            <br/>
+                            <label for="masterOwner"></label><select th:field="*{masterOwner}" id="masterOwner">
+                            <option value="">Select a master</option>
+                            <option th:each="service : ${services}" th:value="${service.getMasterOwner().getId()}"
+                                    th:text="${service.getMasterOwner().getMasterName()}"></option>
+                        </select>
+                            <br/>
+                            <label for="description">Enter description: </label>
+                            <textarea th:field="*{description}" id="description" rows="5" cols="50"></textarea>
+                            <!--  <input type="text" th:field="*{description}" id="description"/>-->
+                            <div style="color:red" th:if="${#fields.hasErrors('description')}"
+                                 th:errors="*{description}">Description error
+                            </div>
+                            <br/>
+                            <input type="submit" value="Update!"/>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end gallery section -->
+
+    <!-- info section -->
+
+
+    <!-- end slider section -->
+</div>
+
+<div th:insert="samples/sample :: info-section"></div>
+
+<!-- footer section -->
+<div th:insert="samples/sample :: footer"></div>
+<!-- footer section -->
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- custom script -->
+<script src="/js/custom.js"></script>
+</body>
+</html>

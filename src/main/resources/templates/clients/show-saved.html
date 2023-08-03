@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Show</title>
+</head>
+<body>
+<p th:text="${'Name: '  + client.getClientName()}">NAME</p>
+<p th:text="${'Phone Number:  ' + client.getPhoneNumber()}">PHONE NUMBER</p>
+<p th:text="${'Email: ' + client.getClientEmail()}">EMAIL</p>
+<p th:text="${'Orders: ' + client.getOrders()}">EMAIL</p>
+
+
+
+<hr/>
+
+<form th:method="GET" th:action="@{/clients/{id}/edit(id=${client.getId()})}">
+  <input type="submit" value="Edit"/>
+</form>
+<p></p>
+
+<form th:method="DELETE" th:action="@{/clients/{id}(id=${client.getId()})}">
+  <input type="submit" value="Delete"/>
+</form>
+
+</body>
+</html>

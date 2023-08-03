@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>BeautySaloon</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<div th:insert="samples/sample :: header"></div>
+
+<section class="gallery_section layout_padding">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <div class="heading_container">
+
+<!--                    <p th:text="${'Name: '  + master.getMasterName()}">NAME</p>-->
+<!--                    <p th:text="${'Rating: ' + master.getMasterRating()}">RATING</p>-->
+<!--                    <p th:text="${'Phone Number:  ' + master.getPhoneNumber()}">PHONE NUMBER</p>-->
+<!--                    <p th:text="${'Email: ' + master.getMasterEmail()}">EMAIL</p>-->
+<!--                    <p>-->
+                    <div class="master-details">
+                        <p><strong>Master's ID:</strong> <span th:text="${master.getId()}"></span></p>
+                        <p><strong>Master's name:</strong> <span th:text="${master.getMasterName()}"></span></p>
+                        <p><strong>Rating:</strong> <span th:text="${master.getMasterRating()}"></span></p>
+                        <p><strong>Phone number:</strong> <span th:text="${master.getPhoneNumber()}"></span></p>
+                        <p><strong>Email:</strong> <span th:text="${master.getMasterEmail()}"></span></p>
+                        <p><strong>Created Date:</strong> <span th:text="${master.getCreatedDate()}"></span></p>
+                        <p><strong>Updated Date:</strong> <span th:text="${master.getUpdatedDate()}"></span></p>
+                    </div>
+                        Services:
+                        <span th:each="service, iterStat : ${master.getServices()}">
+                                <a th:href="@{/services/{serviceId}(serviceId=${service.getId()})}"
+                                   th:text="${service.getServiceName()}"></a>
+                            <span th:if="${!iterStat.last}">; </span>
+                            </span>
+<!--                    </p>-->
+
+
+<!--                    <div class="master-details">-->
+<!--                        <p><strong>Master ID:</strong> <span th:text="${master.getId()}"></span></p>-->
+<!--                        <p><strong>Rating:</strong> <span th:text="${master.getMasterRating()}"></span></p>-->
+<!--                    </div>-->
+
+
+                    <hr/>
+
+                    <form th:method="GET" th:action="@{/masters/{id}/edit(id=${master.getId()})}">
+                        <input type="submit" value="Edit"/>
+                    </form>
+                    <p></p>
+
+                    <form th:method="DELETE" th:action="@{/masters/{id}(id=${master.getId()})}">
+                        <input type="submit" value="Delete"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- end slider section -->
+
+
+<div th:insert="samples/sample :: info-section"></div>
+
+<!-- footer section -->
+<div th:insert="samples/sample :: footer"></div>
+
+<!-- Javascript files -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- custom script -->
+<script src="/js/custom.js"></script>
+</body>
+</html>
