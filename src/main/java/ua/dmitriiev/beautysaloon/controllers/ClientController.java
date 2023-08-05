@@ -8,7 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Client;
-import ua.dmitriiev.beautysaloon.entities.Order;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
 import ua.dmitriiev.beautysaloon.services.ClientServiceImpl;
 
 
@@ -27,25 +28,21 @@ public class ClientController {
     }
 
 
-
     @GetMapping()
     public String listAllClients(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
 
-        if (pageNumber < 0) pageNumber = 0;
-
+        if (pageNumber < 0) {
+            pageNumber = 0;
+        }
 
         Page<Client> clientPage = clientService.listAllClients(pageNumber, pageSize);
-        List<Client> clients = clientPage.getContent();
 
-
-
-        model.addAttribute("clients", clients);
+        model.addAttribute("clients", clientPage.getContent());
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", clientPage.getTotalPages());
-        model.addAttribute("nextPage", pageNumber + 1); // Calculate the nextPage value
-//        model.addAttribute("nextPage", pageNumber + 1); // Calculate the nextPage value
-        model.addAttribute("pageSize", pageSize); // Add thi
+        model.addAttribute("nextPage", pageNumber + 1);
+        model.addAttribute("pageSize", pageSize);
 
         return "clients/index";
     }
@@ -65,12 +62,22 @@ public class ClientController {
 
     @PostMapping()
     public String createClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+
+        if (bindingResult.hasErrors()) {
             return "clients/new";
+        }
 
-        clientService.saveClient(client);
+        try {
+            clientService.saveClient(client);
+        } catch (NotUniquePhoneNumberException ex) {
+            bindingResult.rejectValue("phoneNumber", "error.client", ex.getMessage());
+            return "clients/new";
+        } catch (NotUniqueEmailException ex) {
+            bindingResult.rejectValue("clientEmail", "error.client", ex.getMessage());
+            return "clients/new";
+        }
+
         return "redirect:/clients";
-
     }
 
     @GetMapping("/{id}/edit")
@@ -86,8 +93,19 @@ public class ClientController {
         if (bindingResult.hasErrors())
             return "clients/edit";
 
-        clientService.updateClient(id, client);
+        try {
+            clientService.updateClient(id, client);
+        } catch (NotUniquePhoneNumberException ex) {
+            bindingResult.rejectValue("phoneNumber", "error.client", ex.getMessage());
+            return "clients/edit";
+        } catch (NotUniqueEmailException ex) {
+            bindingResult.rejectValue("clientEmail", "error.client", ex.getMessage());
+            return "clients/edit";
+        }
+
         return "redirect:/clients";
+
+
     }
 
     @DeleteMapping("/{id}")

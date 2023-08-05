@@ -49,10 +49,12 @@
               <label for="phoneNumber">Enter phone number: </label>
               <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
               <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
+              <!--              <p th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}"></p>-->
               <br/>
               <label for="masterEmail">Enter email: </label>
               <input type="text" th:field="*{masterEmail}" id="masterEmail"/>
-              <div style="color:red" th:if="${#fields.hasErrors('masterEmail')}" th:errors="*{masterEmail}">Email Error</div>
+              <div style="color:red" th:if="${#fields.hasErrors('masterEmail')}" th:errors="*{masterEmail}">Email error</div>
+              <!--              <p th:each="error : ${#fields.errors('masterEmail')}" th:text="${error}"></p>-->
               <br/>
 
               <p></p>

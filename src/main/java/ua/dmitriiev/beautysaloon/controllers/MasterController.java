@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Master;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
 import ua.dmitriiev.beautysaloon.services.MasterServiceImpl;
 
 
@@ -80,24 +82,23 @@ public class MasterController {
     @PostMapping()
     public String createNewMaster(@ModelAttribute("master") @Valid Master master, BindingResult bindingResult) {
 
+
         if (bindingResult.hasErrors()) {
             return "masters/new";
         }
 
         try {
             masterService.saveMaster(master);
-        } catch (DataIntegrityViolationException ex) {
-            if (ex.getMessage().contains("master.masterEmail")) {
-                // Handle the duplicate email exception here
-                bindingResult.rejectValue("masterEmail", "error.master", "Email already exists");
-            }
-
-            if (ex.getMessage().contains("master.phoneNumber")) {
-                // Handle the duplicate phone number exception here
-                bindingResult.rejectValue("phoneNumber", "error.phone", "This phone number already exists");
-            }
+        } catch (NotUniquePhoneNumberException ex) {
+            bindingResult.rejectValue("phoneNumber", "error.master", ex.getMessage());
+            return "masters/new";
+        } catch (NotUniqueEmailException ex) {
+            bindingResult.rejectValue("masterEmail", "error.master", ex.getMessage());
+            return "masters/new";
         }
+
         return "redirect:/masters";
+
     }
 
     @GetMapping("/{id}/edit")
@@ -114,7 +115,16 @@ public class MasterController {
             return "masters/edit";
 
 
-        masterService.updateMaster(id, master);
+        try {
+            masterService.updateMaster(id, master);
+        } catch (NotUniquePhoneNumberException ex) {
+            bindingResult.rejectValue("phoneNumber", "error.master", ex.getMessage());
+            return "masters/edit";
+        } catch (NotUniqueEmailException ex) {
+            bindingResult.rejectValue("masterEmail", "error.master", ex.getMessage());
+            return "masters/edit";
+        }
+
         return "redirect:/masters";
     }
 

@@ -6,13 +6,10 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,6 +42,7 @@ public class Client {
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Please enter valid email")
     @Column(name = "email", unique = true)
+//    @UniqueEmail
     private String clientEmail;
 
     @OneToMany(mappedBy = "clientOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -52,7 +50,7 @@ public class Client {
 
     @Column(name = "created_date")
     @CreationTimestamp
-    private LocalDateTime createdDate ;
+    private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @UpdateTimestamp

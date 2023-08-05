@@ -48,14 +48,15 @@
               <div style="color:red" th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}">Name Error</div>
               <br/>
               <label for="phoneNumber">Enter phone number: </label>
-              <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-              <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
-              <br/>
+              <input type="text" th:field="*{phoneNumber}" id="phoneNumber" />
+              <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}">
+                <p th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}"></p>
+              </div>
+              <br />
               <label for="clientEmail">Enter email: </label>
-              <input type="text" th:field="*{clientEmail}" id="clientEmail"/>
-              <div style="color:red" th:if="${#fields.hasErrors('clientEmail')}" th:errors="*{clientEmail}">Email Error</div>
-              <br/>
-              <p></p>
+              <input type="text" th:field="*{clientEmail}" id="clientEmail" />
+              <div style="color:red" th:if="${#fields.hasErrors('clientEmail')}">
+                <p th:each="error : ${#fields.errors('clientEmail')}" th:text="${error}"></p>
               <input type="submit" value="Update!"/>
             </form>
           </div>

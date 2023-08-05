@@ -43,19 +43,23 @@
           <div class="heading_container">
             <form th:method="POST" th:action="@{/clients}" th:object="${client}">
               <label for="clientName">Enter name: </label>
-              <input type="text" th:field="*{clientName}" id="clientName"/>
+              <input type="text" th:field="*{clientName}" id="clientName" />
               <div style="color:red" th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}">Name error</div>
-              <br/>
+              <br />
               <label for="phoneNumber">Enter phone number: </label>
-              <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-              <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone number error</div>
-              <br/>
+              <input type="text" th:field="*{phoneNumber}" id="phoneNumber" />
+              <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}">
+                <p th:each="error : ${#fields.errors('phoneNumber')}" th:text="${error}"></p>
+              </div>
+              <br />
               <label for="clientEmail">Enter email: </label>
-              <input type="text" th:field="*{clientEmail}" id="clientEmail"/>
-              <div style="color:red" th:if="${#fields.hasErrors('clientEmail')}" th:errors="*{clientEmail}">Email error</div>
-              <br/>
+              <input type="text" th:field="*{clientEmail}" id="clientEmail" />
+              <div style="color:red" th:if="${#fields.hasErrors('clientEmail')}">
+                <p th:each="error : ${#fields.errors('clientEmail')}" th:text="${error}"></p>
+              </div>
+              <br />
               <p></p>
-              <input type="submit" value="Create!"/>
+              <input type="submit" value="Create!" />
             </form>
           </div>
         </div>

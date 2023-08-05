@@ -2,22 +2,19 @@ package ua.dmitriiev.beautysaloon.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import ua.dmitriiev.beautysaloon.entities.Client;
-import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
-import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueValue;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
 import ua.dmitriiev.beautysaloon.repositories.ClientRepository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,19 +52,19 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     @Override
     public Client saveClient(Client client) {
+        // Check for duplicate email or phoneNumber before saving
+        Client existingClientByEmail = clientRepository.findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
+        Client existingClientByPhoneNumber = clientRepository.findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
 
-        try {
-            return clientRepository.save(client);
-        } catch (DataIntegrityViolationException ex) {
-            String message = "Client with the same email or phone number already exists.";
-            log.error(message, ex);
-            throw new NotUniqueValue(message, ex);
-        } catch (Exception ex) {
-            log.error("Error while saving client.", ex);
-            throw new RuntimeException("An error occurred while saving the client.");
+        if (existingClientByEmail != null) {
+            throw new NotUniqueEmailException("Email already exists");
         }
-//        return clientRepository.save(client);
 
+        if (existingClientByPhoneNumber != null) {
+            throw new NotUniquePhoneNumberException("Phone number already exists");
+        }
+
+        return clientRepository.save(client);
     }
 
     @Transactional
@@ -77,11 +74,23 @@ public class ClientServiceImpl implements ClientService {
         Client clientToBeUpdated = clientRepository.findClientById(id)
                 .orElseThrow(() -> new NotFoundException("Client not found"));
 
+        // Check for duplicate email and phoneNumber
+        Client existingClientByEmail = clientRepository.findClientByClientEmailEqualsIgnoreCase(updatedClient.getClientEmail());
+        Client existingClientByPhoneNumber = clientRepository.findClientByPhoneNumberEqualsIgnoreCase(updatedClient.getPhoneNumber());
 
-        clientToBeUpdated.setId(updatedClient.getId());
+        if (existingClientByEmail != null && !existingClientByEmail.getId().equals(clientToBeUpdated.getId())) {
+            throw new NotUniqueEmailException("Email already exists");
+        }
+
+        if (existingClientByPhoneNumber != null && !existingClientByPhoneNumber.getId().equals(clientToBeUpdated.getId())) {
+            throw new NotUniquePhoneNumberException("Phone number already exists");
+        }
+
+        // Update the client information
         clientToBeUpdated.setClientName(updatedClient.getClientName());
-        clientToBeUpdated.setPhoneNumber(updatedClient.getPhoneNumber());
         clientToBeUpdated.setOrders(updatedClient.getOrders());
+        clientToBeUpdated.setClientEmail(updatedClient.getClientEmail());
+        clientToBeUpdated.setPhoneNumber(updatedClient.getPhoneNumber());
 
         clientRepository.save(clientToBeUpdated);
     }

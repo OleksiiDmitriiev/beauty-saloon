@@ -1,14 +1,17 @@
 package ua.dmitriiev.beautysaloon.services;
 
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Master;
 
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
 import ua.dmitriiev.beautysaloon.repositories.MasterRepository;
 
 import java.util.*;
@@ -53,6 +56,20 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public void saveMaster(Master master) {
 
+
+        // Check for duplicate email or phoneNumber before savingg
+
+        Master existingMasterByEmail = masterRepository.findMastersByMasterEmailEqualsIgnoreCase(master.getMasterEmail());
+        Master existingMasterByPhoneNumber = masterRepository.findMasterByPhoneNumberEqualsIgnoreCase(master.getPhoneNumber());
+
+        if (existingMasterByEmail != null) {
+            throw new NotUniqueEmailException("Email already exists");
+        }
+
+        if (existingMasterByPhoneNumber != null) {
+            throw new NotUniquePhoneNumberException("Phone number already exists");
+        }
+
         masterRepository.save(master);
 
     }
@@ -60,17 +77,27 @@ public class MasterServiceImpl implements MasterService {
     @Transactional
     @Override
     public void updateMaster(UUID id, Master updatedMaster) {
+
         Master masterToBeUpdated = masterRepository.findMasterById(id)
                 .orElseThrow(() -> new NoSuchElementException("Master not found"));
 
+        Master existingMasterByEmail = masterRepository.findMasterByMasterEmailEqualsIgnoreCase(updatedMaster.getMasterEmail());
+        Master existingMasterByPhoneNumber = masterRepository.findMasterByPhoneNumberEqualsIgnoreCase(updatedMaster.getPhoneNumber());
+
+
+        if (existingMasterByEmail != null && !existingMasterByEmail.getId().equals(masterToBeUpdated.getId())) {
+            throw new NotUniqueEmailException("Email already exists");
+        }
+
+        if (existingMasterByPhoneNumber != null && !existingMasterByPhoneNumber.getId().equals(masterToBeUpdated.getId())) {
+            throw new NotUniquePhoneNumberException("Phone number already exists");
+        }
 
         masterToBeUpdated.setMasterName(updatedMaster.getMasterName());
         masterToBeUpdated.setServices(updatedMaster.getServices());
         masterToBeUpdated.setMasterRating(updatedMaster.getMasterRating());
         masterToBeUpdated.setPhoneNumber(updatedMaster.getPhoneNumber());
         masterToBeUpdated.setMasterEmail(updatedMaster.getMasterEmail());
-//        masterToBeUpdated.setCreatedDate(updatedMaster.getCreatedDate());
-//        masterToBeUpdated.setUpdatedDate(updatedMaster.getUpdatedDate());
 
 
         masterRepository.save(masterToBeUpdated);
