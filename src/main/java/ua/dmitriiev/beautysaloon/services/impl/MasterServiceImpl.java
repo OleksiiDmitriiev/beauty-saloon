@@ -1,4 +1,4 @@
-package ua.dmitriiev.beautysaloon.services;
+package ua.dmitriiev.beautysaloon.services.impl;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Master;
 
-import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
-import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
-import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.*;
 import ua.dmitriiev.beautysaloon.repositories.MasterRepository;
+import ua.dmitriiev.beautysaloon.services.MasterService;
 
 import java.util.*;
 
@@ -21,8 +19,6 @@ import java.util.*;
 @Transactional(readOnly = true)
 public class MasterServiceImpl implements MasterService {
 
-    private static final int DEFAULT_PAGE_NUMBER = 0;
-    private static final int DEFAULT_PAGE_SIZE = 5;
     private final MasterRepository masterRepository;
 
     @Autowired
@@ -40,15 +36,21 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public Master findMasterById(UUID id) {
-        Optional<Master> foundMaster = masterRepository.findMasterById(id);
-        log.debug("Get Master by Id - in service. Id: " + id.toString());
-        return foundMaster.orElse(null);
+
+        try {
+            Optional<Master> foundMaster = masterRepository.findMasterById(id);
+            log.debug("Get Master by Id - in service. Id: " + id.toString());
+            return foundMaster.orElseThrow(() -> new NotFoundException("Master not found"));
+        } catch (NotFoundException exception) {
+            log.error("Master not found with ID: {}", id, exception);
+            throw exception;
+        }
     }
 
     @Override
     public Master findMasterByName(String masterName) {
         Optional<Master> foundMaster = masterRepository.findByMasterNameEqualsIgnoreCase(masterName);
-        return foundMaster.orElse(null);
+        return foundMaster.orElseThrow(() -> new NotFoundException("Master with name '" + masterName + "' not found."));
     }
 
 
@@ -56,17 +58,24 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public void saveMaster(Master master) {
 
-
-        // Check for duplicate email or phoneNumber before savingg
+        if (master == null ||
+                master.getMasterName() == null ||
+                master.getPhoneNumber() == null ||
+                master.getMasterEmail() == null) {
+            log.error("Invalid master data provided: {}", master);
+            throw new IllegalArgumentException("Invalid master data provided.");
+        }
 
         Master existingMasterByEmail = masterRepository.findMastersByMasterEmailEqualsIgnoreCase(master.getMasterEmail());
         Master existingMasterByPhoneNumber = masterRepository.findMasterByPhoneNumberEqualsIgnoreCase(master.getPhoneNumber());
 
         if (existingMasterByEmail != null) {
+            log.error("Duplicate email found while saving master: {}", master.getMasterEmail());
             throw new NotUniqueEmailException("Email already exists");
         }
 
         if (existingMasterByPhoneNumber != null) {
+            log.error("Duplicate phone number found while saving master: {}", master.getPhoneNumber());
             throw new NotUniquePhoneNumberException("Phone number already exists");
         }
 
@@ -86,10 +95,12 @@ public class MasterServiceImpl implements MasterService {
 
 
         if (existingMasterByEmail != null && !existingMasterByEmail.getId().equals(masterToBeUpdated.getId())) {
+            log.error("Duplicate email found while saving master: {}", updatedMaster.getMasterEmail());
             throw new NotUniqueEmailException("Email already exists");
         }
 
         if (existingMasterByPhoneNumber != null && !existingMasterByPhoneNumber.getId().equals(masterToBeUpdated.getId())) {
+            log.error("Duplicate phone number found while saving master: {}", updatedMaster.getPhoneNumber());
             throw new NotUniquePhoneNumberException("Phone number already exists");
         }
 
@@ -113,43 +124,28 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public List<Master> findMastersByName(String masterName) {
+        //TODO for restAPI
+//        List<Master> masters = masterRepository.findMastersByMasterNameEqualsIgnoreCase(masterName);
+//
+//        if (masters.isEmpty()) {
+//            log.warn("No masters found with name: {}", masterName);
+//            throw new NotFoundException("No masters found with name: " + masterName);
+//        }
+//
+//        return masters;
         return masterRepository.findMastersByMasterNameEqualsIgnoreCase(masterName);
+
     }
 
-    //TODO Refactor
-//    @Override
-//    public Page<Master> listAllMasters(String masterName, String phoneNumber, String masterEmail, Integer pageNumber, Integer pageSize) {
-//        return new PageImpl<>(new ArrayList<>(masterRepository.findAll()));
-//    }
-
-    //THIS WORKS
-//    @Override
-//    public Page<Master> listAllMasters() {
-////        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "masterName"));
-//
-//        Pageable pageable = PageRequest.of(DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, Sort.by(Sort.Direction.ASC, "masterName"));
-//
-//        List<Master> masters = masterRepository.findAll(pageable).getContent();
-//
-//        return new PageImpl<>(masters, pageable, masters.size());
-//    }
     @Override
     public Page<Master> listAllMasters(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "masterName"));
-        return masterRepository.findAll(pageable);
+        try {
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "masterName"));
+            return masterRepository.findAll(pageable);
+        } catch (Exception ex) {
+            log.error("An error occurred while listing all masters:", ex);
+            throw new MasterListException("Error occurred while listing masters. Please try again later.");
+        }
     }
-
-    //IT WORKS
-//    @Override
-//    public Page<Master> listAllMasters() {
-//        Pageable pageable = PageRequest.of(DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE, Sort.by(Sort.Direction.ASC, "masterName"));
-//        return masterRepository.findAll(pageable);
-//    }
-
-//    @Override
-//    public Page<Master> listMasters(String masterName, Integer masterRating, String phoneNumber, String masterEmail, Integer pageNumber, Integer pageSize) {
-//        return new PageImpl<>(new ArrayList<>(masterRepository.findAll()));
-////        return new PageImpl<>(new ArrayList<>(beerMap.values()));
-//    }
 
 }

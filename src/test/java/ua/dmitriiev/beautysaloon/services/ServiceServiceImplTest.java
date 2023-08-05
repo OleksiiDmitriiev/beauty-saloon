@@ -1,12 +1,9 @@
 package ua.dmitriiev.beautysaloon.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.repositories.ServiceRepository;
-import ua.dmitriiev.beautysaloon.services.ServiceService;
+import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class ServiceServiceTest {
+public class ServiceServiceImplTest {
 
     @Test
     public void testFindAll() {
@@ -31,7 +28,7 @@ public class ServiceServiceTest {
         when(serviceRepository.findAll()).thenReturn(services);
 
         // Create an instance of the ServiceService and inject the mock repository
-        ServiceService serviceService = new ServiceService(serviceRepository);
+        ServiceServiceImpl serviceService = new ServiceServiceImpl(serviceRepository);
 
         // Call the findAll method
         List<Service> result = serviceService.findAll();
@@ -59,7 +56,7 @@ public class ServiceServiceTest {
         when(serviceRepository.findServiceById(serviceId)).thenReturn(Optional.of(service));
 
         // Create an instance of the ServiceService and inject the mock repository
-        ServiceService serviceService = new ServiceService(serviceRepository);
+        ServiceServiceImpl serviceService = new ServiceServiceImpl(serviceRepository);
 
         // Call the findServiceById method
         Service result = serviceService.findServiceById(serviceId);
@@ -81,7 +78,7 @@ public class ServiceServiceTest {
         // Set the necessary properties of the service
 
         // Create an instance of the ServiceService and inject the mock repository
-        ServiceService serviceService = new ServiceService(serviceRepository);
+        ServiceServiceImpl serviceService = new ServiceServiceImpl(serviceRepository);
 
         // Call the save method
         serviceService.save(service);
@@ -109,7 +106,7 @@ public class ServiceServiceTest {
         when(serviceRepository.findServiceById(existingService.getId())).thenReturn(Optional.of(existingService));
 
         // Create an instance of the ServiceService and inject the mock repository
-        ServiceService serviceService = new ServiceService(serviceRepository);
+        ServiceServiceImpl serviceService = new ServiceServiceImpl(serviceRepository);
 
         // Call the update method
         serviceService.update(existingService.getId(), updatedService);
@@ -127,7 +124,7 @@ public class ServiceServiceTest {
         UUID serviceId = UUID.randomUUID();
 
         // Create an instance of the ServiceService and inject the mock repository
-        ServiceService serviceService = new ServiceService(serviceRepository);
+        ServiceServiceImpl serviceService = new ServiceServiceImpl(serviceRepository);
 
         // Call the delete method
         serviceService.delete(serviceId);

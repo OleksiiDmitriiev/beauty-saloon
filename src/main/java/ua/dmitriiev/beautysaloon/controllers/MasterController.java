@@ -2,7 +2,6 @@ package ua.dmitriiev.beautysaloon.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
-import ua.dmitriiev.beautysaloon.services.MasterServiceImpl;
+import ua.dmitriiev.beautysaloon.services.impl.MasterServiceImpl;
 
 
 import java.util.List;

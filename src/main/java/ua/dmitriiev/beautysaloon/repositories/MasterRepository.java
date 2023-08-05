@@ -23,18 +23,10 @@ public interface MasterRepository extends JpaRepository<Master, UUID> {
     Optional<Master> findByMasterNameEqualsIgnoreCase(String masterName);
     List<Master> findMastersByMasterNameEqualsIgnoreCase(String masterName);
 
-
-
-    //TODO Page
-    Page<Master> findAllByMasterNameIsLikeIgnoreCase(String masterName, Pageable pageable);
-
-    Master findMastersByMasterEmailEqualsIgnoreCase(String masterEmail);
-
     Master findMasterByPhoneNumberEqualsIgnoreCase(String phoneNumber);
 
     Master findMasterByMasterEmailEqualsIgnoreCase(String masterEmail);
-//    Page<Beer> findAllByBeerStyle(BeerStyle beerStyle, Pageable pageable);
-//
-//    Page<Beer> findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle(String beerName, BeerStyle beerStyle, Pageable pageable);
 
+
+    Master findMastersByMasterEmailEqualsIgnoreCase(String masterEmail);
 }

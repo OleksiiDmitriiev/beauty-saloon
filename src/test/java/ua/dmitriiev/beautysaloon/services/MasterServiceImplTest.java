@@ -8,7 +8,7 @@
 //import ua.dmitriiev.beautysaloon.entities.Master;
 //import ua.dmitriiev.beautysaloon.repositories.MasterRepository;
 //import ua.dmitriiev.beautysaloon.services.MasterService;
-//import ua.dmitriiev.beautysaloon.services.MasterServiceImpl;
+//import ua.dmitriiev.beautysaloon.services.impl.MasterServiceImpl;
 //
 //import java.util.ArrayList;
 //import java.util.List;

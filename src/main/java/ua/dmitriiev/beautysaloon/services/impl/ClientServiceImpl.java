@@ -1,4 +1,4 @@
-package ua.dmitriiev.beautysaloon.services;
+package ua.dmitriiev.beautysaloon.services.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.dmitriiev.beautysaloon.entities.Client;
+import ua.dmitriiev.beautysaloon.lib.exceptions.ClientListException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
 import ua.dmitriiev.beautysaloon.repositories.ClientRepository;
+import ua.dmitriiev.beautysaloon.services.ClientService;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,15 +54,25 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     @Override
     public Client saveClient(Client client) {
-        // Check for duplicate email or phoneNumber before saving
+
+        if (client == null ||
+                client.getClientName() == null ||
+                client.getPhoneNumber() == null ||
+                client.getClientEmail() == null) {
+            log.error("Invalid client data provided: {}", client);
+            throw new IllegalArgumentException("Invalid client data provided.");
+        }
+
         Client existingClientByEmail = clientRepository.findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         Client existingClientByPhoneNumber = clientRepository.findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
 
         if (existingClientByEmail != null) {
+            log.error("Duplicate email found while saving client: {}", client.getClientEmail());
             throw new NotUniqueEmailException("Email already exists");
         }
 
         if (existingClientByPhoneNumber != null) {
+            log.error("Duplicate phone number found while saving client: {}", client.getPhoneNumber());
             throw new NotUniquePhoneNumberException("Phone number already exists");
         }
 
@@ -74,19 +86,20 @@ public class ClientServiceImpl implements ClientService {
         Client clientToBeUpdated = clientRepository.findClientById(id)
                 .orElseThrow(() -> new NotFoundException("Client not found"));
 
-        // Check for duplicate email and phoneNumber
+
         Client existingClientByEmail = clientRepository.findClientByClientEmailEqualsIgnoreCase(updatedClient.getClientEmail());
         Client existingClientByPhoneNumber = clientRepository.findClientByPhoneNumberEqualsIgnoreCase(updatedClient.getPhoneNumber());
 
         if (existingClientByEmail != null && !existingClientByEmail.getId().equals(clientToBeUpdated.getId())) {
+            log.error("Duplicate email found while updating client: {}", updatedClient.getClientEmail());
             throw new NotUniqueEmailException("Email already exists");
         }
 
         if (existingClientByPhoneNumber != null && !existingClientByPhoneNumber.getId().equals(clientToBeUpdated.getId())) {
+            log.error("Duplicate phone number found while updating client: {}", updatedClient.getPhoneNumber());
             throw new NotUniquePhoneNumberException("Phone number already exists");
         }
 
-        // Update the client information
         clientToBeUpdated.setClientName(updatedClient.getClientName());
         clientToBeUpdated.setOrders(updatedClient.getOrders());
         clientToBeUpdated.setClientEmail(updatedClient.getClientEmail());
@@ -106,19 +119,33 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findClientByName(String clientName) {
         Optional<Client> foundClient = clientRepository.findByClientNameEqualsIgnoreCase(clientName);
-        return foundClient.orElse(null);
+        return foundClient.orElseThrow(() -> new NotFoundException("Client with name '" + clientName + "' not found."));
     }
 
     @Override
     public List<Client> findClientsByEmail(String clientEmail) {
 
+        //Todo for restAPI
+//        List<Client> clients = clientRepository.findClientsByClientEmailEqualsIgnoreCase(clientEmail);
+//
+//        if (clients.isEmpty()) {
+//            log.warn("No clients found with email: {}", clientEmail);
+//            throw new NotFoundException("No clients found with email: " + clientEmail);
+//        }
+//
+//        return clients;
         return clientRepository.findClientsByClientEmailEqualsIgnoreCase(clientEmail);
     }
 
     @Override
     public Page<Client> listAllClients(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "updatedDate"));
-        return clientRepository.findAll(pageable);
+        try {
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "updatedDate"));
+            return clientRepository.findAll(pageable);
+        } catch (Exception ex) {
+            log.error("An error occurred while listing all clients:", ex);
+            throw new ClientListException("Error occurred while listing clients. Please try again later.");
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package ua.dmitriiev.beautysaloon.services;
+package ua.dmitriiev.beautysaloon.services.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Order;
+import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
+import ua.dmitriiev.beautysaloon.lib.exceptions.OrderListException;
 import ua.dmitriiev.beautysaloon.repositories.OrderRepository;
+import ua.dmitriiev.beautysaloon.services.OrderService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,14 +40,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOrderById(UUID id) {
-
-        Optional<Order> foundOrder = orderRepository.findOrderById(id);
-        return foundOrder.orElse(null);
+        try {
+            Optional<Order> foundOrder = orderRepository.findOrderById(id);
+            return foundOrder.orElseThrow(() -> new NotFoundException("Order not found"));
+        } catch (NotFoundException exception) {
+            log.error("Order not found with ID: {}", id, exception);
+            throw exception;
+        }
     }
 
     @Transactional
     @Override
     public void saveOrder(Order order) {
+
+        if (order == null ||
+                order.getOrderName() == null ||
+                order.getServiceOwner() == null ||
+                order.getClientOwner() == null) {
+            log.error("Invalid order data provided: {}", order);
+            throw new IllegalArgumentException("Invalid order data provided.");
+        }
+
 
         orderRepository.save(order);
     }
@@ -56,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
         Order orderToBeUpdated = orderRepository.findOrderById(id)
                 .orElseThrow(() -> new NoSuchElementException("Order not found"));
 
-        orderToBeUpdated.setId(updatedOrder.getId());
+
         orderToBeUpdated.setOrderName(updatedOrder.getOrderName());
         orderToBeUpdated.setOrderStatus(updatedOrder.getOrderStatus());
         orderToBeUpdated.setServiceOwner(updatedOrder.getServiceOwner());
@@ -80,19 +95,34 @@ public class OrderServiceImpl implements OrderService {
     public Order findOrderByName(String orderName) {
 
         Optional<Order> foundOrder = orderRepository.findByOrderNameEqualsIgnoreCase(orderName);
-        return foundOrder.orElse(null);
+        return foundOrder.orElseThrow(() -> new NotFoundException("Order with name '" + orderName + "' not found."));
 
     }
 
     @Override
     public List<Order> findOrdersByName(String orderName) {
+
+        //TODO for restAPI
+//        List<Order> orders = orderRepository.findOrdersByOrderNameEqualsIgnoreCase(orderName);
+//
+//        if (orders.isEmpty()) {
+//            log.warn("No orders found with name: {}", orderName);
+//            throw new NotFoundException("No orders found with name: " + orderName);
+//        }
+//
+//        return orders;
         return orderRepository.findOrdersByOrderNameEqualsIgnoreCase(orderName);
     }
 
     @Override
     public Page<Order> listAllOrders(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "updatedDate"));
-        return orderRepository.findAll(pageable);
+        try {
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "updatedDate"));
+            return orderRepository.findAll(pageable);
+        } catch (Exception ex) {
+            log.error("An error occurred while listing all orders:", ex);
+            throw new OrderListException("Error occurred while listing orders. Please try again later.");
+        }
     }
 
 }

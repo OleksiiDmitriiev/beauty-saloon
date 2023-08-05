@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
-import ua.dmitriiev.beautysaloon.services.ClientServiceImpl;
+import ua.dmitriiev.beautysaloon.services.impl.ClientServiceImpl;
 
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller

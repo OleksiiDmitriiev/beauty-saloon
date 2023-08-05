@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.entities.Service;
-import ua.dmitriiev.beautysaloon.services.OrderServiceImpl;
-import ua.dmitriiev.beautysaloon.services.ServiceService;
+import ua.dmitriiev.beautysaloon.services.impl.OrderServiceImpl;
+import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
 
 
 import java.util.List;
@@ -22,11 +22,11 @@ public class OrderController {
 
     private final OrderServiceImpl orderService;
 
-    private final ServiceService serviceService;
+    private final ServiceServiceImpl serviceService;
 
 
     @Autowired
-    public OrderController(OrderServiceImpl orderService, ServiceService serviceService) {
+    public OrderController(OrderServiceImpl orderService, ServiceServiceImpl serviceService) {
         this.orderService = orderService;
         this.serviceService = serviceService;
     }

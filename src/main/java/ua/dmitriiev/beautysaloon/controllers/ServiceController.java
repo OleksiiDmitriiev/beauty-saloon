@@ -7,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.services.MasterService;
-import ua.dmitriiev.beautysaloon.services.ServiceService;
+import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
 
 
 import java.util.List;
@@ -20,12 +19,12 @@ import java.util.UUID;
 @RequestMapping("/services")
 public class ServiceController {
 
-    private final ServiceService serviceService;
+    private final ServiceServiceImpl serviceService;
     private final MasterService masterService;
 
 
     @Autowired
-    public ServiceController(ServiceService serviceService, MasterService masterService) {
+    public ServiceController(ServiceServiceImpl serviceService, MasterService masterService) {
         this.serviceService = serviceService;
         this.masterService = masterService;
     }
@@ -84,7 +83,7 @@ public class ServiceController {
         if (bindingResult.hasErrors())
             return "services/new";
 
-        serviceService.save(service);
+        serviceService.saveService(service);
         return "redirect:/services";
 
     }
@@ -92,7 +91,7 @@ public class ServiceController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("service", serviceService.findServiceById(id));
-        model.addAttribute("services", serviceService.findAll());
+        model.addAttribute("services", serviceService.listServices());
         return "services/edit";
     }
 
@@ -105,14 +104,14 @@ public class ServiceController {
             return "services/edit";
 
 //        serviceService.update(id, service);
-        serviceService.update(id,service);
+        serviceService.updateService(id,service);
         return "redirect:/services";
     }
 
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        serviceService.delete(id);
+        serviceService.deleteServiceById(id);
         return "redirect:/services";
     }
 

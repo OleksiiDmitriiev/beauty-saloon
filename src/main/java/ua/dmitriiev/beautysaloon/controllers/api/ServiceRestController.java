@@ -9,7 +9,7 @@ import ua.dmitriiev.beautysaloon.entities.Service;
 
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
 import ua.dmitriiev.beautysaloon.model.ServiceDTO;
-import ua.dmitriiev.beautysaloon.services.ServiceService;
+import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,11 +22,11 @@ public class ServiceRestController {
 
 
     private final SalonMapperImpl salonMapper;
-    private final ServiceService serviceService;
+    private final ServiceServiceImpl serviceService;
 
 
     @Autowired
-    public ServiceRestController(SalonMapperImpl salonMapper, ServiceService serviceService) {
+    public ServiceRestController(SalonMapperImpl salonMapper, ServiceServiceImpl serviceService) {
         this.salonMapper = salonMapper;
         this.serviceService = serviceService;
     }
@@ -43,7 +43,7 @@ public class ServiceRestController {
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<ServiceDTO> listAllServices() {
-        List<Service> services = serviceService.findAll();
+        List<Service> services = serviceService.listServices();
         return salonMapper.servicesToServicesDto(services);
 
 
@@ -56,14 +56,14 @@ public class ServiceRestController {
         Service service = salonMapper.serviceDtoToService(serviceDTO);
         service.setMasterOwner(service.getMasterOwner());
 
-        serviceService.save(service);
+        serviceService.saveService(service);
     }
 
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteServiceById(@PathVariable("id") UUID id) {
 
-        serviceService.delete(id);
+        serviceService.deleteServiceById(id);
     }
 
     @PutMapping("/{id}")
@@ -71,7 +71,7 @@ public class ServiceRestController {
     public void updateServiceById(@PathVariable("id") UUID id, @Valid @RequestBody ServiceDTO serviceDTO) {
 
         Service service = salonMapper.serviceDtoToService(serviceDTO);
-        serviceService.update(id, service);
+        serviceService.updateService(id, service);
 
     }
 

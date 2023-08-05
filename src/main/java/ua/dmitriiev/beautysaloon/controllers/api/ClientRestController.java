@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
 import ua.dmitriiev.beautysaloon.model.ClientDTO;
-import ua.dmitriiev.beautysaloon.services.ClientServiceImpl;
+import ua.dmitriiev.beautysaloon.services.impl.ClientServiceImpl;
 
 import java.util.List;
 import java.util.UUID;
