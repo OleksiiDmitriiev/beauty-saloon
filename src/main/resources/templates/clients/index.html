@@ -42,7 +42,7 @@
                 <div class="col-lg-5 ml-auto">
                     <div class="heading_container">
 
-                        <a href="/clients/search">Find client by email</a>
+                        <a href="/clients/search">Find client by name</a>
                         <p></p>
                         <div th:each="client : ${clients}">
                             <a th:href="@{/clients/{id}(id=${client.getId()})}"

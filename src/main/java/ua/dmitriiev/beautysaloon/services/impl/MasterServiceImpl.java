@@ -37,14 +37,17 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public Master findMasterById(UUID id) {
 
-        try {
-            Optional<Master> foundMaster = masterRepository.findMasterById(id);
-            log.debug("Get Master by Id - in service. Id: " + id.toString());
-            return foundMaster.orElseThrow(() -> new NotFoundException("Master not found"));
-        } catch (NotFoundException exception) {
-            log.error("Master not found with ID: {}", id, exception);
-            throw exception;
-        }
+//        try {
+//            Optional<Master> foundMaster = masterRepository.findMasterById(id);
+//            log.debug("Get Master by Id - in service. Id: " + id.toString());
+//            return foundMaster.orElseThrow(() -> new NotFoundException("Master not found"));
+//        } catch (NotFoundException exception) {
+//            log.error("Master not found with ID: {}", id, exception);
+//            throw exception;
+//        }
+        Optional<Master> foundMaster = masterRepository.findMasterById(id);
+
+        return foundMaster.orElseThrow(() -> new NotFoundException("Master not found with ID: " + id));
     }
 
     @Override

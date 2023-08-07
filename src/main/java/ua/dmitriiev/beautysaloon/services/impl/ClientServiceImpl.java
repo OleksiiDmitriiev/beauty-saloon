@@ -41,13 +41,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client findClientById(UUID id) {
 
-        try {
-            Optional<Client> foundClient = clientRepository.findClientById(id);
-            return foundClient.orElseThrow(() -> new NotFoundException("Client not found"));
-        } catch (NotFoundException exception) {
-            log.error("Client not found with ID: {}", id, exception);
-            throw exception;
-        }
+        log.debug("Searching for client with ID: {}", id);
+        Optional<Client> foundClient = clientRepository.findClientById(id);
+        log.debug("Searching for client with ID: {}", foundClient);
+        return foundClient.orElseThrow(() -> new NotFoundException("Client not found with ID: " + id));
 
     }
 
@@ -123,7 +120,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> findClientsByEmail(String clientEmail) {
+    public List<Client> findClientsByName(String clientName) {
 
         //Todo for restAPI
 //        List<Client> clients = clientRepository.findClientsByClientEmailEqualsIgnoreCase(clientEmail);
@@ -134,7 +131,7 @@ public class ClientServiceImpl implements ClientService {
 //        }
 //
 //        return clients;
-        return clientRepository.findClientsByClientEmailEqualsIgnoreCase(clientEmail);
+        return clientRepository.findClientsByClientNameEqualsIgnoreCase(clientName);
     }
 
     @Override

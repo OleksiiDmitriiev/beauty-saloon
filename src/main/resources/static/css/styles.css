@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+@font-face {
+    font-family: roboto;
+    src: url(static/fonts/Roboto-Regular.ttf);
+}
+body {
+    font-family: roboto;
+    overflow: hidden;
+
+
+
+}
+header {
+    width: 100%;
+    height: 120px;
+    background-color: #FADA35;
+    position: relative;
+}
+
+h1 {
+    color: azure;
+    margin-top: 35px;
+    margin-left: 200px;
+    position: absolute;
+    font-size: 50px;
+}
+
+.right_corner_top {
+    color: aliceblue;
+    margin-left: 1200px;
+    margin-top: 33px;
+    position: absolute;
+}
+
+h2 {
+    display: inline-block;
+    font-size: 30px;
+    margin-left: 80px;
+    margin-right: 20px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+img {
+    margin-top: 10px;
+
+}
+
+
+main {
+    width: 100%;
+    height: 100vh;
+    background-color: #021002;
+    background-size: cover;
+}
+.menu {
+    position: relative;
+    margin-top: 37px;
+    margin-left: 40px;
+}
+
+.master {
+    position: relative;
+    color: aliceblue;
+}
+.master h1 {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 50px;
+    font-size: 60px;
+
+}
+.master h2 {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 335px;
+    font-size: 60px;
+}
+.square {
+    position: relative;
+    margin-top: 162px;
+    margin-left: 311px;
+    font-size: 50px;
+
+}
+.master h3 {
+    position: absolute;
+    margin-top: 230px;
+    margin-left: 52px;
+    font-size: 30px;
+}
+
+.yello_small_button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 52px;
+    margin-top: 550px;
+}
+.edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 105px;
+    margin-top: 554px;
+    font-size: 22px;
+
+}
+.yello_small_button2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 250px;
+    margin-top: 550px;
+}
+.delete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 290px;
+    margin-top: 554px;
+    font-size: 22px;
+
+}
+.phone_button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 58px;
+    margin-top: 610px;
+}
+.phone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 115px;
+    margin-top: 613px;
+    font-size: 26px;
+}
+.email {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 52px;
+    margin-top: 670px;
+}
+.email_text{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 115px;
+    margin-top: 670px;
+    font-size: 26px;
+}
+.master_id {
+    position: absolute;
+    margin-left: 1080px;
+    margin-top: 35px;
+    font-size: 26px;
+    color: #FADA35;
+}
+.master .services {
+    position: relative;
+    margin-left: 1000px;
+    margin-top: -60px;
+    font-size: 60px;
+}
+.main_button {
+    position: absolute;
+    margin-left: 972px;
+}
+.main_button2 {
+    position: absolute;
+    margin-left: 972px;
+    margin-top: 100px;
+}
+.main_button3 {
+    position: absolute;
+    margin-left: 972px;
+    margin-top: 190px;
+}
+.main_button4 {
+    position: absolute;
+    margin-left: 972px;
+    margin-top: 280px;
+}
+.main_button5 {
+    position: absolute;
+    margin-left: 972px;
+    margin-top: 370px;
+}
+.text1 {
+    position: absolute;
+    margin-left: 1085px;
+    margin-top: 20px;
+    font-size: 40px;
+
+}
+.text2 {
+    position: absolute;
+    margin-left: 1085px;
+    margin-top: 110px;
+    font-size: 40px;
+
+}
+.text3 {
+    position: absolute;
+    margin-left: 1085px;
+    margin-top: 200px;
+    font-size: 40px;
+
+}
+.text4 {
+    position: absolute;
+    margin-left: 1085px;
+    margin-top: 290px;
+    font-size: 40px;
+
+}
+.text5 {
+    position: absolute;
+    margin-left: 1085px;
+    margin-top: 380px;
+    font-size: 40px;
+
+}
+.arrow_left {
+    position: absolute;
+    margin-left: 1020px;
+    margin-top: 450px;
+}
+.arrow_right{
+    position: absolute;
+    margin-left: 1210px;
+    margin-top: 450px;
+}

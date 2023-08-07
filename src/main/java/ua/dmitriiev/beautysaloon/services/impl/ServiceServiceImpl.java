@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.ServiceListException;
@@ -43,15 +44,19 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public Service findServiceById(UUID id) {
+//
+//        try {
+//            Optional<Service> foundService = serviceRepository.findServiceById(id);
+//            log.debug("Get Service by Id - in service. Id: " + id.toString());
+//            return foundService.orElseThrow(() -> new NotFoundException("Service not found"));
+//        } catch (NotFoundException exception) {
+//            log.error("Service not found with ID: {}", id, exception);
+//            throw exception;
+//        }
 
-        try {
-            Optional<Service> foundService = serviceRepository.findServiceById(id);
-            log.debug("Get Service by Id - in service. Id: " + id.toString());
-            return foundService.orElseThrow(() -> new NotFoundException("Service not found"));
-        } catch (NotFoundException exception) {
-            log.error("Service not found with ID: {}", id, exception);
-            throw exception;
-        }
+        Optional<Service> foundService = serviceRepository.findServiceById(id);
+
+        return foundService.orElseThrow(() -> new NotFoundException("Service not found with ID: " + id));
     }
 
     @Transactional

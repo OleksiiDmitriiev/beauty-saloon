@@ -69,6 +69,7 @@ public class MasterController {
     public String getMasterById(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("master", masterService.findMasterById(id));
 
+//        return "masters/show";
         return "masters/show";
     }
 

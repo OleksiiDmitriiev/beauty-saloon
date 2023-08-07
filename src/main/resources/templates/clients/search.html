@@ -43,8 +43,8 @@
           <div class="heading_container">
             <h1>Search Clients</h1>
             <form action="/clients/search" method="get">
-              <label for="clientEmail">Client Email:</label>
-              <input type="text" id="clientEmail" name="clientEmail" th:value="${clientEmail}">
+              <label for="clientName">Client Name:</label>
+              <input type="text" id="clientName" name="clientName" th:value="${clientName}">
               <button type="submit">Search</button>
             </form>
 
@@ -69,7 +69,7 @@
               </ul>
             </div>
             <div th:unless="${clients != null and not #lists.isEmpty(clients)}">
-              <p>No clients found with the provided email.</p>
+              <p>No clients found with the provided name.</p>
             </div>
           </div>
         </div>

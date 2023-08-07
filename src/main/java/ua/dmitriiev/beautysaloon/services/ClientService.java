@@ -24,7 +24,7 @@ public interface ClientService {
 
     Client findClientByName(String clientName);
 
-    List<Client> findClientsByEmail(String clientName);
+    List<Client> findClientsByName(String clientName);
 
     Page<Client> listAllClients(int pageNumber, int pageSize);
 }

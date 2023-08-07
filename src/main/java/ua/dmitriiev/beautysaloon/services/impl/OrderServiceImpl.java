@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.OrderListException;
@@ -40,13 +41,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOrderById(UUID id) {
-        try {
-            Optional<Order> foundOrder = orderRepository.findOrderById(id);
-            return foundOrder.orElseThrow(() -> new NotFoundException("Order not found"));
-        } catch (NotFoundException exception) {
-            log.error("Order not found with ID: {}", id, exception);
-            throw exception;
-        }
+//        try {
+//            Optional<Order> foundOrder = orderRepository.findOrderById(id);
+//            return foundOrder.orElseThrow(() -> new NotFoundException("Order not found"));
+//        } catch (NotFoundException exception) {
+//            log.error("Order not found with ID: {}", id, exception);
+//            throw exception;
+//        }
+
+        Optional<Order> foundOrder = orderRepository.findOrderById(id);
+
+        return foundOrder.orElseThrow(() -> new NotFoundException("Order not found with ID: " + id));
     }
 
     @Transactional

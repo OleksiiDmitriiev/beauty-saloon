@@ -24,4 +24,6 @@ public interface ClientRepository extends JpaRepository<Client, UUID> {
 
 
     Client findClientByPhoneNumberEqualsIgnoreCase(String phoneNumber);
+
+    List<Client> findClientsByClientNameEqualsIgnoreCase(String clientName);
 }

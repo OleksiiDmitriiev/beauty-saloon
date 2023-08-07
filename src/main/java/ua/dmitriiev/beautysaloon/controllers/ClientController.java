@@ -114,9 +114,9 @@ public class ClientController {
     }
 
     @GetMapping("/search")
-    public String getClientsByEmail(@RequestParam(required = false) String clientEmail, Model model) {
+    public String getClientsByName(@RequestParam(required = false) String clientName, Model model) {
 
-        model.addAttribute("clients", clientService.findClientsByEmail(clientEmail));
+        model.addAttribute("clients", clientService.findClientsByName(clientName));
 
         return "clients/search";
     }
