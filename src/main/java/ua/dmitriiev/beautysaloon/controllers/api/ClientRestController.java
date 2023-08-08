@@ -2,6 +2,7 @@ package ua.dmitriiev.beautysaloon.controllers.api;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -11,7 +12,6 @@ import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
 import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.services.impl.ClientServiceImpl;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,11 +28,22 @@ public class ClientRestController {
     }
 
 
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<ClientDTO> listAllClients() {
+//        List<Client> clients = clientService.listClients();
+//        return salonMapper.clientsToClientsDto(clients);
+//    }
+
+
+
+
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<ClientDTO> listAllClients() {
-        List<Client> clients = clientService.listClients();
-        return salonMapper.clientsToClientsDto(clients);
+    public Page<ClientDTO> listAllClients(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                          @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+        Page<Client> clients = clientService.listAllClients(pageNumber,pageSize);
+        return salonMapper.pageClientsToPageClientsDto(clients);
     }
 
 

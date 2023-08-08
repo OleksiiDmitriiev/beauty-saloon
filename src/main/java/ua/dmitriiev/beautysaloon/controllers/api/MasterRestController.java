@@ -5,11 +5,14 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Master;
 
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
+import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.model.MasterDTO;
 import ua.dmitriiev.beautysaloon.services.MasterService;
 
@@ -46,11 +49,19 @@ public class MasterRestController {
         return salonMapper.masterToMasterDto(master);
     }
 
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<MasterDTO> listAllMasters() {
+//        List<Master> masters = masterService.listMasters();
+//        return salonMapper.mastersToMastersDto(masters);
+//    }
+
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<MasterDTO> listAllMasters() {
-        List<Master> masters = masterService.listMasters();
-        return salonMapper.mastersToMastersDto(masters);
+    public Page<MasterDTO> listAllMasters(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                          @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+        Page<Master> masters = masterService.listAllMasters(pageNumber, pageSize);
+        return salonMapper.pageMastersToPageMastersDto(masters);
     }
 
     @PostMapping("/save")

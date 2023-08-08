@@ -80,6 +80,7 @@ public class OrderController {
             return "orders/new";
 
 
+        //TOdo check
         if (order.getServiceOwner() == null) {
 
             return "redirect:/orders/luna";

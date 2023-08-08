@@ -1,6 +1,8 @@
 package ua.dmitriiev.beautysaloon.mappers;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Master;
@@ -85,6 +87,18 @@ public class SalonMapperImpl implements SalonMapper {
     }
 
     @Override
+    public Page<MasterDTO> pageMastersToPageMastersDto(Page<Master> masters) {
+        if (masters == null) {
+            return null;
+        }
+
+        List<MasterDTO> masterDTOList = mastersToMastersDto(masters.getContent());
+
+        return new PageImpl<>(masterDTOList, masters.getPageable(), masters.getTotalElements());
+    }
+
+
+    @Override
     public Master masterSlimDtoToMaster(MasterSlimDTO masterSlimDTO) {
 
 
@@ -136,6 +150,17 @@ public class SalonMapperImpl implements SalonMapper {
                 .map(this::masterToMasterSlimDto)
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Page<MasterSlimDTO> pageMastersToPageMastersSlimDto(Page<Master> masters) {
+        if (masters == null) {
+            return null;
+        }
+
+        List<MasterSlimDTO> masterDTOList = mastersToMastersSlimDto(masters.getContent());
+
+        return new PageImpl<>(masterDTOList, masters.getPageable(), masters.getTotalElements());
     }
 
     @Override
@@ -203,6 +228,17 @@ public class SalonMapperImpl implements SalonMapper {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Page<ClientDTO> pageClientsToPageClientsDto(Page<Client> clientPage) {
+        if (clientPage == null) {
+            return null;
+        }
+
+        List<ClientDTO> clientDTOList = clientsToClientsDto(clientPage.getContent());
+
+        return new PageImpl<>(clientDTOList, clientPage.getPageable(), clientPage.getTotalElements());
+    }
+
 
     @Override
     public Client clientSlimDtoToClient(ClientSlimDTO clientSlimDTO) {
@@ -250,6 +286,17 @@ public class SalonMapperImpl implements SalonMapper {
         return clients.stream()
                 .map(this::clientToClientSlimDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ClientSlimDTO> pageClientsToPageClientsSlimDto(Page<Client> clientPage) {
+        if (clientPage == null) {
+            return null;
+        }
+
+        List<ClientSlimDTO> clientSlimDTOList = clientsToClientsSlimDto(clientPage.getContent());
+
+        return new PageImpl<>(clientSlimDTOList, clientPage.getPageable(), clientPage.getTotalElements());
     }
 
     @Override
@@ -313,6 +360,17 @@ public class SalonMapperImpl implements SalonMapper {
     }
 
     @Override
+    public Page<OrderDTO> pageOrdersToPageOrdersDto(Page<Order> orders) {
+        if (orders == null) {
+            return null;
+        }
+
+        List<OrderDTO> orderDTOList = ordersToOrdersDto(orders.getContent());
+
+        return new PageImpl<>(orderDTOList, orders.getPageable(), orders.getTotalElements());
+    }
+
+    @Override
     public Order orderSlimDtoToOrder(OrderSlimDTO orderSlimDTO) {
 
         Order order = new Order();
@@ -348,6 +406,17 @@ public class SalonMapperImpl implements SalonMapper {
         return orders.stream()
                 .map(this::orderToOrderSlimDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<OrderSlimDTO> pageOrdersToPageOrdersSlimDto(Page<Order> orders) {
+        if (orders == null) {
+            return null;
+        }
+
+        List<OrderSlimDTO> orderSlimDTOList = ordersToOrdersSlimDto(orders.getContent());
+
+        return new PageImpl<>(orderSlimDTOList, orders.getPageable(), orders.getTotalElements());
     }
 
     //TODO mapping
@@ -453,6 +522,20 @@ public class SalonMapperImpl implements SalonMapper {
     }
 
     @Override
+    public Page<ServiceDTO> pageServicesToPageServicesDto(Page<Service> services) {
+
+        if (services == null) {
+            return null;
+        }
+
+        List<ServiceDTO> serviceDTOList = servicesToServicesDto(services.getContent());
+
+        return new PageImpl<>(serviceDTOList, services.getPageable(), services.getTotalElements());
+
+
+    }
+
+    @Override
     public Service serviceSlimDtoToService(ServiceSlimDTO serviceSlimDTO) {
 
         if (serviceSlimDTO == null) {
@@ -499,8 +582,17 @@ public class SalonMapperImpl implements SalonMapper {
     }
 
 
+    @Override
+    public Page<ServiceSlimDTO> pageServicesToPageServicesSlimDto(Page<Service> services) {
 
+        if (services == null) {
+            return null;
+        }
 
+        List<ServiceSlimDTO> serviceDTOList = servicesToServicesSlimDto(services.getContent());
+
+        return new PageImpl<>(serviceDTOList, services.getPageable(), services.getTotalElements());
+    }
 
 }
 

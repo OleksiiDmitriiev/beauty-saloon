@@ -5,6 +5,7 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Order;
@@ -26,6 +27,8 @@ public interface SalonMapper {
     @IterableMapping(qualifiedByName = "toServicesDto")
     List<ServiceDTO> servicesToServicesDto(List<Service> services);
 
+    Page<ServiceDTO> pageServicesToPageServicesDto(Page<Service> services);
+
 
     Service serviceSlimDtoToService(ServiceSlimDTO serviceSlimDTO);
 
@@ -33,6 +36,9 @@ public interface SalonMapper {
 
     @IterableMapping(qualifiedByName = "toServicesDto")
     List<ServiceSlimDTO> servicesToServicesSlimDto(List<Service> services);
+
+    Page<ServiceSlimDTO> pageServicesToPageServicesSlimDto(Page<Service> services);
+
 
     //Master
 
@@ -43,6 +49,8 @@ public interface SalonMapper {
 
     List<MasterDTO> mastersToMastersDto(List<Master> masters);
 
+    Page<MasterDTO> pageMastersToPageMastersDto(Page<Master> masters);
+
     //NEW
     Master masterSlimDtoToMaster(MasterSlimDTO masterSlimDTO);
 
@@ -50,6 +58,8 @@ public interface SalonMapper {
     MasterSlimDTO masterToMasterSlimDto(Master master);
 
     List<MasterSlimDTO> mastersToMastersSlimDto(List<Master> masters);
+
+    Page<MasterSlimDTO> pageMastersToPageMastersSlimDto(Page<Master> masters);
 
     //Client
 
@@ -61,6 +71,7 @@ public interface SalonMapper {
 
     List<ClientDTO> clientsToClientsDto(List<Client> clients);
 
+    Page<ClientDTO> pageClientsToPageClientsDto(Page<Client> clientPage);
 
 
     Client clientSlimDtoToClient(ClientSlimDTO clientSlimDTO);
@@ -68,6 +79,8 @@ public interface SalonMapper {
     ClientSlimDTO clientToClientSlimDto(Client client);
 
     List<ClientSlimDTO> clientsToClientsSlimDto(List<Client> clients);
+
+    Page<ClientSlimDTO> pageClientsToPageClientsSlimDto(Page<Client> clientPage);
 
 
     //Orders
@@ -79,6 +92,7 @@ public interface SalonMapper {
 
     List<OrderDTO> ordersToOrdersDto(List<Order> orders);
 
+    Page<OrderDTO> pageOrdersToPageOrdersDto(Page<Order> orders);
 
 
     Order orderSlimDtoToOrder(OrderSlimDTO orderSlimDTO);
@@ -88,7 +102,9 @@ public interface SalonMapper {
 
     List<OrderSlimDTO> ordersToOrdersSlimDto(List<Order> orders);
 
-//Orders
+    Page<OrderSlimDTO> pageOrdersToPageOrdersSlimDto(Page<Order> orders);
+
+
     Order orderPostDtoToOrder(OrderPostDTO orderPostDTO);
 
 

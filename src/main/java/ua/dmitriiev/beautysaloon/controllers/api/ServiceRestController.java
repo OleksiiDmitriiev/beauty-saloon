@@ -3,13 +3,17 @@ package ua.dmitriiev.beautysaloon.controllers.api;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import ua.dmitriiev.beautysaloon.entities.Service;
 
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
+
 import ua.dmitriiev.beautysaloon.model.ServiceDTO;
 import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -40,15 +44,31 @@ public class ServiceRestController {
         return salonMapper.serviceToServiceDto(service);
     }
 
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<ServiceDTO> listAllServices() {
+//        List<Service> services = serviceService.listServices();
+//        return salonMapper.servicesToServicesDto(services);
+//    }
+
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public Page<ServiceDTO> listAllServices(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+//                                            @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+//
+//        Page<Service> services = serviceService.listAllServices(pageNumber, pageSize);
+//        return salonMapper.pageServicesToPageServicesDto(services);
+//    }
+
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<ServiceDTO> listAllServices() {
-        List<Service> services = serviceService.listServices();
-        return salonMapper.servicesToServicesDto(services);
+    public List<ServiceDTO> listAllServices(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                            @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
-
+        Page<Service> services = serviceService.listAllServices(pageNumber, pageSize);
+        List<ServiceDTO> serviceDTOs = salonMapper.pageServicesToPageServicesDto(services).getContent();
+        return serviceDTOs;
     }
-
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

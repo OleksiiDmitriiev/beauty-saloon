@@ -3,10 +3,13 @@ package ua.dmitriiev.beautysaloon.controllers.api;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
+import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.model.OrderDTO;
 import ua.dmitriiev.beautysaloon.services.OrderService;
 
@@ -43,11 +46,19 @@ public class OrderRestController {
         return salonMapper.orderToOrderDto(order);
     }
 
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<OrderDTO> listAllOrders() {
+//        List<Order> orders = orderService.listOrders();
+//        return salonMapper.ordersToOrdersDto(orders);
+//    }
+
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderDTO> listAllOrders() {
-        List<Order> orders = orderService.listOrders();
-        return salonMapper.ordersToOrdersDto(orders);
+    public Page<OrderDTO> listAllOrders(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                        @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+        Page<Order> orders = orderService.listAllOrders(pageNumber, pageSize);
+        return salonMapper.pageOrdersToPageOrdersDto(orders);
     }
 
     @PostMapping()
