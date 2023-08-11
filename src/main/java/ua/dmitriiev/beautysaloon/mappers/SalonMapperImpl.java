@@ -1,6 +1,7 @@
 package ua.dmitriiev.beautysaloon.mappers;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
@@ -9,14 +10,23 @@ import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.model.*;
+import ua.dmitriiev.beautysaloon.services.impl.ClientServiceImpl;
+import ua.dmitriiev.beautysaloon.services.impl.ServiceServiceImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Component
 public class SalonMapperImpl implements SalonMapper {
 
+    private final ClientServiceImpl clientService;
+    private final ServiceServiceImpl serviceService;
+
+    public SalonMapperImpl(ClientServiceImpl clientService, ServiceServiceImpl serviceService) {
+        this.clientService = clientService;
+        this.serviceService = serviceService;
+    }
 
     @Override
     public Master masterDtoToMaster(MasterDTO masterDTO) {
@@ -420,9 +430,64 @@ public class SalonMapperImpl implements SalonMapper {
     }
 
     //TODO mapping
+
+
+//    public Order orderDtoToOrder(OrderDTO orderDTO) {
+//
+//        Order order = new Order();
+//
+//        order.setId(orderDTO.getId());
+//        order.setOrderName(orderDTO.getOrderName());
+//        order.setOrderStatus(orderDTO.getOrderStatus());
+//
+//        if (orderDTO.getServiceOwner() != null) {
+//            order.setServiceOwner(serviceSlimDtoToService(orderDTO.getServiceOwner()));
+//        }
+//
+//        if (orderDTO.getClientOwner() != null) {
+//            order.setClientOwner(clientSlimDtoToClient(orderDTO.getClientOwner()));
+//        }
+//
+//        order.setUpdatedDate(orderDTO.getUpdatedDate());
+//        order.setCreatedDate(orderDTO.getCreatedDate());
+//
+//
+//        return order;
+//    }
+
+
     @Override
     public Order orderPostDtoToOrder(OrderPostDTO orderPostDTO) {
-        return null;
+
+        Order order = new Order();
+
+        order.setId(orderPostDTO.getId());
+        order.setOrderName(orderPostDTO.getOrderName());
+        order.setOrderStatus(orderPostDTO.getOrderStatus());
+
+
+        if (orderPostDTO.getServiceOwnerId() != null) {
+            Service serviceOwner = serviceService.findServiceById(UUID.fromString(orderPostDTO.getClientOwnerId()));
+            order.setServiceOwner(serviceOwner);
+            log.info(serviceOwner.getServiceName());
+            log.info(serviceOwner.getDescription());
+            log.info(serviceOwner.getMasterOwner().getId().toString());
+            log.info(serviceOwner.getCreatedDate().toString());
+            log.info(serviceOwner.getCreatedDate().toString());
+
+        }
+
+
+        if (orderPostDTO.getClientOwnerId() != null) {
+            Client clientOwner = clientService.findClientById(UUID.fromString(orderPostDTO.getClientOwnerId()));
+            order.setClientOwner(clientOwner);
+        }
+
+        order.setUpdatedDate(orderPostDTO.getUpdatedDate());
+        order.setCreatedDate(orderPostDTO.getCreatedDate());
+
+
+        return order;
     }
 
     @Override

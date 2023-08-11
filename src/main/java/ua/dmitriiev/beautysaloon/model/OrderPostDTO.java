@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.dmitriiev.beautysaloon.lib.OrderUtils;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -19,17 +20,16 @@ public class OrderPostDTO {
 
     private UUID id;
 
-    @NotBlank
-    @NotNull
-    private String orderName;
 
-    @NotNull
+    private String orderName = OrderUtils.generateRandomOrderName();
+
+//    @NotNull
     @Builder.Default
     private OrderStatus orderStatus = OrderStatus.SCHEDULED;
 
-    private UUID serviceOwner;
+    private String serviceOwnerId;
 
-    private UUID clientOwner;
+    private String clientOwnerId;
 
 
     private LocalDateTime createdDate;

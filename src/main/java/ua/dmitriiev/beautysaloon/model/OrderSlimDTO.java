@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.dmitriiev.beautysaloon.lib.OrderUtils;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -18,11 +19,11 @@ public class OrderSlimDTO {
 
     private UUID id;
 
-    @NotBlank
-    @NotNull
-    private String orderName;
 
-    @NotNull
+    private String orderName = OrderUtils.generateRandomOrderName();
+
+
+//    @NotNull
     @Builder.Default
     private OrderStatus orderStatus = OrderStatus.SCHEDULED;
 

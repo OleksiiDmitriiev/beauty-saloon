@@ -42,22 +42,29 @@
         <div class="col-lg-5 ml-auto">
           <div class="heading_container">
             <form th:method="PATCH" th:action="@{/orders/{id}(id=${order.getId()})}" th:object="${order}">
-              <label for="orderName">Enter name: </label>
+              <label for="orderName">Enter name:</label>
               <input type="text" th:field="*{orderName}" id="orderName"/>
-              <div style="color:red" th:if="${#fields.hasErrors('orderName')}" th:errors="*{orderName}">Name Error</div>
+              <div th:if="${#fields.hasErrors('orderName')}" class="error-message">
+                <p th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></p>
+              </div>
               <br/>
-              <label for="serviceOwner">Enter service master: </label>
+              <label for="serviceOwner">Enter service master:</label>
               <input type="text" th:field="*{serviceOwner}" id="serviceOwner"/>
-              <div style="color:red" th:if="${#fields.hasErrors('serviceOwner')}" th:errors="*{serviceOwner}">Service error</div>
+              <div th:if="${#fields.hasErrors('serviceOwner')}" class="error-message">
+                <p th:each="err : ${#fields.errors('serviceOwner')}" th:text="${err}"></p>
+              </div>
               <br/>
-              <label for="clientOwner">Enter client: </label>
+              <label for="clientOwner">Enter client:</label>
               <input type="text" th:field="*{clientOwner}" id="clientOwner"/>
-              <div style="color:red" th:if="${#fields.hasErrors('clientOwner')}" th:errors="*{clientOwner}">Client error</div>
+              <div th:if="${#fields.hasErrors('clientOwner')}" class="error-message">
+                <p th:each="err : ${#fields.errors('clientOwner')}" th:text="${err}"></p>
+              </div>
               <br/>
-              <br/>
-              <label for="orderStatus">Order status: </label>
+              <label for="orderStatus">Order status:</label>
               <input type="text" th:field="*{orderStatus}" id="orderStatus"/>
-              <div style="color:red" th:if="${#fields.hasErrors('orderStatus')}" th:errors="*{orderStatus}">Order error</div>
+              <div th:if="${#fields.hasErrors('orderStatus')}" class="error-message">
+                <p th:each="err : ${#fields.errors('orderStatus')}" th:text="${err}"></p>
+              </div>
               <br/>
 
               <input type="submit" value="Update!"/>

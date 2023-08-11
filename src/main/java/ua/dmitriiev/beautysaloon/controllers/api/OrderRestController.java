@@ -11,6 +11,7 @@ import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
 import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.model.OrderDTO;
+import ua.dmitriiev.beautysaloon.model.OrderPostDTO;
 import ua.dmitriiev.beautysaloon.services.OrderService;
 
 import java.util.List;
@@ -78,6 +79,8 @@ public class OrderRestController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateOrderById(@PathVariable("id") UUID id, @Valid @RequestBody OrderDTO orderDTO) {
+
+//        Order order = salonMapper.orderPostDtoToOrder(orderDTO);
         Order order = salonMapper.orderDtoToOrder(orderDTO);
         orderService.updateOrder(id, order);
     }

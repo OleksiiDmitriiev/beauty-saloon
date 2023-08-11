@@ -1,5 +1,8 @@
 package ua.dmitriiev.beautysaloon.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,14 +17,19 @@ public class ServiceSlimDTO {
 
     private UUID id;
 
+//    @NotEmpty(message = "Name should not be empty")
+//    @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
     private String serviceName;
+
 
     @Builder.Default
     private int serviceRating = 0;
 
 
+//    @NotEmpty(message = "Description should not be empty")
+//    @NotBlank(message = "Please enter a valid description")
+//    @Size(min = 3, max = 200, message = "Description should be between 3 and 300 characters")
     private String description;
-
 
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;

@@ -90,6 +90,14 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public void updateMaster(UUID id, Master updatedMaster) {
 
+        if (updatedMaster == null ||
+                updatedMaster.getMasterName() == null ||
+                updatedMaster.getPhoneNumber() == null ||
+                updatedMaster.getMasterEmail() == null) {
+            log.error("Invalid master data provided: {}", updatedMaster);
+            throw new IllegalArgumentException("Invalid master data provided.");
+        }
+
         Master masterToBeUpdated = masterRepository.findMasterById(id)
                 .orElseThrow(() -> new NoSuchElementException("Master not found"));
 

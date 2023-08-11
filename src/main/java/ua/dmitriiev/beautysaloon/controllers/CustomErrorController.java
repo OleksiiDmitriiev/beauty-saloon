@@ -2,6 +2,7 @@ package ua.dmitriiev.beautysaloon.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ua.dmitriiev.beautysaloon.lib.exceptions.*;
@@ -43,6 +44,20 @@ public class CustomErrorController {
     public String handleServiceListException(ServiceListException ex, Model model) {
         log.error("Handle Service list exception occurred:", ex);
         model.addAttribute("errorMessage", "Unable to display list of services. Please try again later.");
+        return "exceptions/error-page"; // Name of your error page view
+    }
+
+//    @ExceptionHandler(NotUniquePhoneNumberException.class)
+//    public String handleNotUniquePhoneNumberException(NotUniquePhoneNumberException ex, Model model, BindingResult bindingResult) {
+//        bindingResult.rejectValue("phoneNumber", "error.client", ex.getMessage());
+//        return "clients/edit";
+//    }
+
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentException(IllegalArgumentException ex, Model model) {
+        log.error("IllegalArgumentException  occurred:", ex);
+        model.addAttribute("errorMessage", ex.getMessage());
         return "exceptions/error-page"; // Name of your error page view
     }
 

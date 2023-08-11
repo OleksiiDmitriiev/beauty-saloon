@@ -41,8 +41,8 @@ public class Order {
     private Service serviceOwner;
 
 
-//    @NotEmpty(message = "Name should not be empty")
-//    @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
     @Column(name = "name")
     private String orderName = OrderUtils.generateRandomOrderName();
 

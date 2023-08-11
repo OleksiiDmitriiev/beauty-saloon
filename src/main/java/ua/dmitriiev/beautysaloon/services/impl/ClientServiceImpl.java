@@ -80,6 +80,14 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void updateClient(UUID id, Client updatedClient) {
 
+        if (updatedClient == null ||
+                updatedClient.getClientName() == null ||
+                updatedClient.getPhoneNumber() == null ||
+                updatedClient.getClientEmail() == null) {
+            log.error("Invalid client data provided: {}", updatedClient);
+            throw new IllegalArgumentException("Invalid client data provided.");
+        }
+
         Client clientToBeUpdated = clientRepository.findClientById(id)
                 .orElseThrow(() -> new NotFoundException("Client not found"));
 

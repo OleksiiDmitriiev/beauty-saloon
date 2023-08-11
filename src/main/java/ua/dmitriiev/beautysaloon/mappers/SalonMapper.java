@@ -105,6 +105,8 @@ public interface SalonMapper {
     Page<OrderSlimDTO> pageOrdersToPageOrdersSlimDto(Page<Order> orders);
 
 
+    //Post versions
+
     Order orderPostDtoToOrder(OrderPostDTO orderPostDTO);
 
 

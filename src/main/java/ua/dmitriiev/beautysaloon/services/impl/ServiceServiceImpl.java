@@ -12,6 +12,7 @@ import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.ServiceListException;
+import ua.dmitriiev.beautysaloon.lib.validations.ServiceValidator;
 import ua.dmitriiev.beautysaloon.repositories.ServiceRepository;
 import ua.dmitriiev.beautysaloon.services.ServiceService;
 
@@ -63,13 +64,8 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public void saveService(Service service) {
 
-        if (service == null ||
-                service.getMasterOwner() == null ||
-                service.getServiceName() == null ||
-                service.getDescription() == null) {
-            log.error("Invalid service data provided: {}", service);
-            throw new IllegalArgumentException("Invalid service data provided.");
-        }
+        ServiceValidator.validateService(service);
+
         serviceRepository.save(service);
     }
 
@@ -77,6 +73,9 @@ public class ServiceServiceImpl implements ServiceService {
     @Transactional
     @Override
     public void updateService(UUID id, Service updatedService) {
+
+        ServiceValidator.validateService(updatedService);
+
         Service serviceToBeUpdated = serviceRepository.findServiceById(id)
                 .orElseThrow(() -> new NoSuchElementException("Service not found"));
 

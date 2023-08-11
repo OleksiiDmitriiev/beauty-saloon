@@ -14,10 +14,10 @@ public class CustomErrorRestController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
+//    }
 
     @ExceptionHandler(ClientListException.class)
     public ResponseEntity<String> handleClientListException(ClientListException ex) {
@@ -49,4 +49,37 @@ public class CustomErrorRestController {
     public ResponseEntity<String> handleNotUniquePhoneNumberException(NotUniquePhoneNumberException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
+//    }
+
+    @ExceptionHandler(InvalidServiceException.class)
+    public ResponseEntity<String> handleInvalidServiceException(InvalidServiceException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidClientException.class)
+    public ResponseEntity<String> handleInvalidClientException(InvalidClientException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+
+    @ExceptionHandler(InvalidMasterException.class)
+    public ResponseEntity<String> handleInvalidMasterException(InvalidMasterException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+
+        @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
+    }
+
 }

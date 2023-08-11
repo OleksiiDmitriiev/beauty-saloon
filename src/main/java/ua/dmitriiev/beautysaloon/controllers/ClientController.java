@@ -97,6 +97,7 @@ public class ClientController {
 
         try {
             clientService.updateClient(id, client);
+
         } catch (NotUniquePhoneNumberException ex) {
             bindingResult.rejectValue("phoneNumber", "error.client", ex.getMessage());
             return "clients/edit";

@@ -67,24 +67,25 @@ public class ClientRestController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Client> save(@RequestBody @Valid Client client) {
+    public ResponseEntity<Client> saveClient(@RequestBody @Valid Client client) {
 //        Client client = salonMapper.clientDtoToClient(clientDTO);
+
         var saveResult = clientService.saveClient(client);
         return ResponseEntity.ok(saveResult);
     }
 
 
-    @PatchMapping("/{id}")
-
-    public String update(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult,
-                         @PathVariable("id") UUID id) {
-
-        if (bindingResult.hasErrors())
-            return "clients/edit";
-
-        clientService.updateClient(id, client);
-        return "redirect:/clients";
-    }
+//    @PatchMapping("/{id}")
+//
+//    public String updateClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult,
+//                               @PathVariable("id") UUID id) {
+//
+//        if (bindingResult.hasErrors())
+//            return "clients/edit";
+//
+//        clientService.updateClient(id, client);
+//        return "redirect:/clients";
+//    }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

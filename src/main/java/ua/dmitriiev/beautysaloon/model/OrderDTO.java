@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.dmitriiev.beautysaloon.lib.OrderUtils;
 
 
 import java.time.LocalDateTime;
@@ -21,11 +22,10 @@ public class OrderDTO {
 
 
 
-    @NotBlank
-    @NotNull
-    private String orderName;
 
-    @NotNull
+    private String orderName = OrderUtils.generateRandomOrderName();
+
+//    @NotNull
     @Builder.Default
     private OrderStatus orderStatus = OrderStatus.SCHEDULED;
 

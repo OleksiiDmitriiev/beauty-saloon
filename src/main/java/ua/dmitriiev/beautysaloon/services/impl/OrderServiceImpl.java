@@ -8,15 +8,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Order;
+import ua.dmitriiev.beautysaloon.lib.validations.OrderValidator;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.OrderListException;
 import ua.dmitriiev.beautysaloon.repositories.OrderRepository;
 import ua.dmitriiev.beautysaloon.services.OrderService;
 
+
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,9 +27,9 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
+
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository) {
-
         this.orderRepository = orderRepository;
     }
 
@@ -58,13 +58,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(Order order) {
 
-        if (order == null ||
-                order.getOrderName() == null ||
-                order.getServiceOwner() == null ||
-                order.getClientOwner() == null) {
-            log.error("Invalid order data provided: {}", order);
-            throw new IllegalArgumentException("Invalid order data provided.");
-        }
+        OrderValidator.validateOrder(order);
 
 
         orderRepository.save(order);
@@ -73,14 +67,20 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public void updateOrder(UUID id, Order updatedOrder) {
+
+        OrderValidator.validateOrder(updatedOrder);
+
         Order orderToBeUpdated = orderRepository.findOrderById(id)
-                .orElseThrow(() -> new NoSuchElementException("Order not found"));
+                .orElseThrow(() -> new NotFoundException("Order not found"));
 
 
         orderToBeUpdated.setOrderName(updatedOrder.getOrderName());
         orderToBeUpdated.setOrderStatus(updatedOrder.getOrderStatus());
+
         orderToBeUpdated.setServiceOwner(updatedOrder.getServiceOwner());
+
         orderToBeUpdated.setClientOwner(updatedOrder.getClientOwner());
+
         orderToBeUpdated.setOrderStatus(updatedOrder.getOrderStatus());
 
 
@@ -129,5 +129,6 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderListException("Error occurred while listing orders. Please try again later.");
         }
     }
+
 
 }

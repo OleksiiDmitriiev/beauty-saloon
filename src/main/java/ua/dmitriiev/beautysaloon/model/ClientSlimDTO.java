@@ -1,8 +1,7 @@
 package ua.dmitriiev.beautysaloon.model;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,17 +21,18 @@ public class ClientSlimDTO {
     private UUID id;
 
 
-    @NotBlank
-    @NotNull
+//    @NotEmpty(message = "Name should not be empty")
+//    @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
     private String clientName;
 
 
-    @NotBlank
-    @NotNull
+//    @NotEmpty(message = "Phone number should not be empty")
+//    @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",
+//            message = "Please enter phone number with : + (country code)")
     private String phoneNumber;
 
-    @NotNull
-    @Email
+//    @NotEmpty(message = "Email should not be empty")
+//    @Email(message = "Please enter valid email")
     private String clientEmail;
 
 
