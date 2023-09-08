@@ -41,13 +41,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOrderById(UUID id) {
-//        try {
-//            Optional<Order> foundOrder = orderRepository.findOrderById(id);
-//            return foundOrder.orElseThrow(() -> new NotFoundException("Order not found"));
-//        } catch (NotFoundException exception) {
-//            log.error("Order not found with ID: {}", id, exception);
-//            throw exception;
-//        }
 
         Optional<Order> foundOrder = orderRepository.findOrderById(id);
 
@@ -107,15 +100,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findOrdersByName(String orderName) {
 
-        //TODO for restAPI
-//        List<Order> orders = orderRepository.findOrdersByOrderNameEqualsIgnoreCase(orderName);
-//
-//        if (orders.isEmpty()) {
-//            log.warn("No orders found with name: {}", orderName);
-//            throw new NotFoundException("No orders found with name: " + orderName);
-//        }
-//
-//        return orders;
+
         return orderRepository.findOrdersByOrderNameEqualsIgnoreCase(orderName);
     }
 

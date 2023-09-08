@@ -14,10 +14,6 @@ public class CustomErrorRestController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
-//    }
 
     @ExceptionHandler(ClientListException.class)
     public ResponseEntity<String> handleClientListException(ClientListException ex) {
@@ -50,10 +46,6 @@ public class CustomErrorRestController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
-//    }
 
     @ExceptionHandler(InvalidServiceException.class)
     public ResponseEntity<String> handleInvalidServiceException(InvalidServiceException ex) {
@@ -77,9 +69,9 @@ public class CustomErrorRestController {
     }
 
 
-        @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An internal server error occurred.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
 
 }

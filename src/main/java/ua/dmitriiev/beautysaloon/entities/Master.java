@@ -6,13 +6,10 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,14 +19,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Table(name = "master")
 @Table(name = "master")
-//        uniqueConstraints = {
-//                @UniqueConstraint(columnNames = {"email"}, name = "uk_master_email"),
-//                @UniqueConstraint(columnNames = {"phone_number"}, name = "uk_master_phone_number")
 
-//        }
-//)
 public class Master {
 
     @Id
@@ -47,7 +38,6 @@ public class Master {
     @JsonIgnore
     @OneToMany(mappedBy = "masterOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Service> services = new HashSet<>();
-//    private List<Service> services = List.of();
 
 
     @Column(name = "master_rating")
@@ -67,12 +57,10 @@ public class Master {
 
     @Column(name = "created_date")
     @CreationTimestamp
-//    @CreatedDate
     private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
     @UpdateTimestamp
-//    @LastModifiedDate
     private LocalDateTime updatedDate;
 
 

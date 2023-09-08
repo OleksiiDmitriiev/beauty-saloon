@@ -1,7 +1,7 @@
 package ua.dmitriiev.beautysaloon.services;
 
 import org.springframework.data.domain.Page;
-import ua.dmitriiev.beautysaloon.entities.Master;
+
 import ua.dmitriiev.beautysaloon.entities.Order;
 
 import java.util.List;

@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>BeautySaloon</title>
 
-    <!-- slider stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
 
-    <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="/css/responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <link href="/css/responsive.css" rel="stylesheet"/>
 
 
 </head>
 <body>
 <div class="hero_area">
-    <!-- header section strats -->
-    <div th:insert="samples/sample :: header"></div>
-    <!-- end header section -->
 
-    <!-- slider section -->
-    <!-- gallery section -->
+    <div th:insert="samples/sample :: header"></div>
+
     <section class="gallery_section layout_padding">
 
 
@@ -43,19 +41,20 @@
                     <div class="heading_container">
 
                         <form th:method="POST" th:action="@{/orders}" th:object="${order}">
-<!--                            <label for="orderName">Enter name: </label>-->
-<!--                            <input type="text" th:field="*{orderName}" id="orderName"/>-->
-<!--                            <div style="color:red" th:if="${#fields.hasErrors('orderName')}" th:errors="*{orderName}">Name Error</div>-->
-<!--                            <br/>-->
-<!--                            <label for="serviceOwner">Enter service: </label>-->
 
-                            <input type="hidden" th:field="*{serviceOwner}" id="serviceOwner" th:value="${order.serviceOwner != null ? order.serviceOwner.id : param.serviceId}" />
-                            <!-- Other form fields... -->
-                            <div style="color:red" th:if="${#fields.hasErrors('serviceOwner')}" th:errors="*{serviceOwner}">Service error</div>
+
+                            <input type="hidden" th:field="*{serviceOwner}" id="serviceOwner"
+                                   th:value="${order.serviceOwner != null ? order.serviceOwner.id : param.serviceId}"/>
+
+                            <div style="color:red" th:if="${#fields.hasErrors('serviceOwner')}"
+                                 th:errors="*{serviceOwner}">Service error
+                            </div>
                             <br/>
                             <label for="clientOwner">Enter your client's id : </label>
                             <input type="text" th:field="*{clientOwner}" id="clientOwner"/>
-                            <div style="color:red" th:if="${#fields.hasErrors('clientOwner')}" th:errors="*{clientOwner}">Client error</div>
+                            <div style="color:red" th:if="${#fields.hasErrors('clientOwner')}"
+                                 th:errors="*{clientOwner}">Client error
+                            </div>
                             <br/>
                             <input type="submit" value="Create!"/>
                         </form>
@@ -64,27 +63,19 @@
             </div>
         </div>
     </section>
-    <!-- end gallery section -->
 
-    <!-- info section -->
-
-
-    <!-- end slider section -->
 </div>
 
 <div th:insert="samples/sample :: info-section"></div>
 
-<!-- footer section -->
-<div th:insert="samples/sample :: footer"></div>
-<!-- footer section -->
 
-<!-- Javascript files -->
-<!-- jQuery -->
+<div th:insert="samples/sample :: footer"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- custom script -->
+
 <script src="/js/custom.js"></script>
 </body>
 </html>

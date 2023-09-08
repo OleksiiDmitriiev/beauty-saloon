@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import ua.dmitriiev.beautysaloon.entities.Master;
 import ua.dmitriiev.beautysaloon.entities.Service;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotFoundException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.ServiceListException;
@@ -45,15 +44,7 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public Service findServiceById(UUID id) {
-//
-//        try {
-//            Optional<Service> foundService = serviceRepository.findServiceById(id);
-//            log.debug("Get Service by Id - in service. Id: " + id.toString());
-//            return foundService.orElseThrow(() -> new NotFoundException("Service not found"));
-//        } catch (NotFoundException exception) {
-//            log.error("Service not found with ID: {}", id, exception);
-//            throw exception;
-//        }
+
 
         Optional<Service> foundService = serviceRepository.findServiceById(id);
 
@@ -96,13 +87,6 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public List<Service> findServicesByName(String serviceName) {
 
-//        //TODO for restAPI
-//        List<Service> services = serviceRepository.findServicesByServiceNameEqualsIgnoreCase(serviceName);
-//        if (services.isEmpty()) {
-//            log.warn("No services found with name: {}", serviceName);
-//            throw new NotFoundException("No Services found with name: " + serviceName);
-//        }
-//        return services;
 
         return serviceRepository.findServicesByServiceNameEqualsIgnoreCase(serviceName);
     }

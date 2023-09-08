@@ -1,100 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
 
-  <title>BeautySaloon</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
-  <!-- Custom styles for this template -->
-  <link href="/css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="/css/responsive.css" rel="stylesheet" />
+    <title>BeautySaloon</title>
+
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <link href="/css/responsive.css" rel="stylesheet"/>
 
 
 </head>
 <body>
 <div class="hero_area">
-  <!-- header section strats -->
-  <div th:insert="samples/sample :: header"></div>
-  <!-- end header section -->
 
-  <!-- slider section -->
-  <!-- gallery section -->
-  <section class="gallery_section layout_padding">
+    <div th:insert="samples/sample :: header"></div>
+
+    <section class="gallery_section layout_padding">
 
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5 ml-auto">
-          <div class="heading_container">
-            <form th:method="PATCH" th:action="@{/orders/{id}(id=${order.getId()})}" th:object="${order}">
-              <label for="orderName">Enter name:</label>
-              <input type="text" th:field="*{orderName}" id="orderName"/>
-              <div th:if="${#fields.hasErrors('orderName')}" class="error-message">
-                <p th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></p>
-              </div>
-              <br/>
-              <label for="serviceOwner">Enter service master:</label>
-              <input type="text" th:field="*{serviceOwner}" id="serviceOwner"/>
-              <div th:if="${#fields.hasErrors('serviceOwner')}" class="error-message">
-                <p th:each="err : ${#fields.errors('serviceOwner')}" th:text="${err}"></p>
-              </div>
-              <br/>
-              <label for="clientOwner">Enter client:</label>
-              <input type="text" th:field="*{clientOwner}" id="clientOwner"/>
-              <div th:if="${#fields.hasErrors('clientOwner')}" class="error-message">
-                <p th:each="err : ${#fields.errors('clientOwner')}" th:text="${err}"></p>
-              </div>
-              <br/>
-              <label for="orderStatus">Order status:</label>
-              <input type="text" th:field="*{orderStatus}" id="orderStatus"/>
-              <div th:if="${#fields.hasErrors('orderStatus')}" class="error-message">
-                <p th:each="err : ${#fields.errors('orderStatus')}" th:text="${err}"></p>
-              </div>
-              <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+                        <form th:method="PATCH" th:action="@{/orders/{id}(id=${order.getId()})}" th:object="${order}">
+                            <label for="orderName">Enter name:</label>
+                            <input type="text" th:field="*{orderName}" id="orderName"/>
+                            <div th:if="${#fields.hasErrors('orderName')}" class="error-message">
+                                <p th:each="err : ${#fields.errors('orderName')}" th:text="${err}"></p>
+                            </div>
+                            <br/>
+                            <label for="serviceOwner">Enter service master:</label>
+                            <input type="text" th:field="*{serviceOwner}" id="serviceOwner"/>
+                            <div th:if="${#fields.hasErrors('serviceOwner')}" class="error-message">
+                                <p th:each="err : ${#fields.errors('serviceOwner')}" th:text="${err}"></p>
+                            </div>
+                            <br/>
+                            <label for="clientOwner">Enter client:</label>
+                            <input type="text" th:field="*{clientOwner}" id="clientOwner"/>
+                            <div th:if="${#fields.hasErrors('clientOwner')}" class="error-message">
+                                <p th:each="err : ${#fields.errors('clientOwner')}" th:text="${err}"></p>
+                            </div>
+                            <br/>
+                            <label for="orderStatus">Order status:</label>
+                            <input type="text" th:field="*{orderStatus}" id="orderStatus"/>
+                            <div th:if="${#fields.hasErrors('orderStatus')}" class="error-message">
+                                <p th:each="err : ${#fields.errors('orderStatus')}" th:text="${err}"></p>
+                            </div>
+                            <br/>
 
-              <input type="submit" value="Update!"/>
-            </form>
-          </div>
+                            <input type="submit" value="Update!"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- end gallery section -->
+    </section>
 
-  <!-- info section -->
-
-
-  <!-- end slider section -->
 </div>
 
 <div th:insert="samples/sample :: info-section"></div>
 
-<!-- footer section -->
-<div th:insert="samples/sample :: footer"></div>
-<!-- footer section -->
 
-<!-- Javascript files -->
-<!-- jQuery -->
+<div th:insert="samples/sample :: footer"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- custom script -->
+
 <script src="/js/custom.js"></script>
 </body>
 </html>

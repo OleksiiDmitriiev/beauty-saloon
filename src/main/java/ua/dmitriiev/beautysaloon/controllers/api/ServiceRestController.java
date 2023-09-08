@@ -44,21 +44,6 @@ public class ServiceRestController {
         return salonMapper.serviceToServiceDto(service);
     }
 
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<ServiceDTO> listAllServices() {
-//        List<Service> services = serviceService.listServices();
-//        return salonMapper.servicesToServicesDto(services);
-//    }
-
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public Page<ServiceDTO> listAllServices(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-//                                            @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-//
-//        Page<Service> services = serviceService.listAllServices(pageNumber, pageSize);
-//        return salonMapper.pageServicesToPageServicesDto(services);
-//    }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
@@ -66,8 +51,7 @@ public class ServiceRestController {
                                             @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         Page<Service> services = serviceService.listAllServices(pageNumber, pageSize);
-        List<ServiceDTO> serviceDTOs = salonMapper.pageServicesToPageServicesDto(services).getContent();
-        return serviceDTOs;
+        return salonMapper.pageServicesToPageServicesDto(services).getContent();
     }
 
     @PostMapping()

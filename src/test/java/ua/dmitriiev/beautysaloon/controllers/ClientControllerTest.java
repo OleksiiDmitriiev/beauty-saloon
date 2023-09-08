@@ -34,9 +34,6 @@ class ClientControllerTest {
     @Mock
     private Model model;
 
-    @Mock
-    private BindingResult bindingResult;
-
 
     @BeforeEach
     public void setUp() {
@@ -49,11 +46,10 @@ class ClientControllerTest {
         int pageNumber = 0;
         int pageSize = 5;
 
-        // Create a mock Page<Client>
+
         Page<Client> mockPage = mock(Page.class);
         when(mockPage.getContent()).thenReturn(Collections.emptyList());
-        when(mockPage.getTotalPages()).thenReturn(2); // Adjust the total pages as needed
-
+        when(mockPage.getTotalPages()).thenReturn(2);
         when(clientService.listAllClients(pageNumber, pageSize)).thenReturn(mockPage);
 
         String viewName = clientController.listAllClients(pageNumber, pageSize, model);
@@ -61,7 +57,7 @@ class ClientControllerTest {
         verify(clientService, times(1)).listAllClients(pageNumber, pageSize);
         verify(model, times(1)).addAttribute(eq("clients"), anyList());
         verify(model, times(1)).addAttribute(eq("currentPage"), eq(pageNumber));
-        verify(model, times(1)).addAttribute(eq("totalPages"), eq(2)); // Update to the expected total pages
+        verify(model, times(1)).addAttribute(eq("totalPages"), eq(2));
         verify(model, times(1)).addAttribute(eq("nextPage"), eq(pageNumber + 1));
         verify(model, times(1)).addAttribute(eq("pageSize"), eq(pageSize));
         assertEquals("clients/index", viewName);
@@ -70,10 +66,10 @@ class ClientControllerTest {
 
     @Test
     public void testGetClientById() {
-        // Create a sample UUID for the client
+
         UUID clientId = UUID.fromString("bcbf5827-af33-428f-8333-336d86d15dbf");
 
-        // Create a real Client object with sample data
+
         Client realClient = new Client();
         realClient.setId(clientId);
         realClient.setClientName("Kolyan Client");
@@ -82,20 +78,20 @@ class ClientControllerTest {
         realClient.setCreatedDate(LocalDateTime.parse("2023-08-05T17:11:00"));
         realClient.setUpdatedDate(LocalDateTime.parse("2023-08-05T17:11:00"));
 
-        // Mock the behavior of the clientService.findClientById method
+
         when(clientService.findClientById(clientId)).thenReturn(realClient);
 
-        // Call the getClientById method of the ClientController
+
         String viewName = clientController.getClientById(clientId, model);
 
-        // Verify that clientService.findClientById was called exactly once with the correct argument
+
         verify(clientService, times(1)).findClientById(clientId);
 
-        // Use ArgumentCaptor to capture the argument passed to model.addAttribute
+
         ArgumentCaptor<Client> clientArgumentCaptor = ArgumentCaptor.forClass(Client.class);
         verify(model, times(1)).addAttribute(eq("client"), clientArgumentCaptor.capture());
 
-        // Retrieve the captured client and assert its properties
+
         Client capturedClient = clientArgumentCaptor.getValue();
         assertEquals(realClient.getId(), capturedClient.getId());
         assertEquals(realClient.getClientName(), capturedClient.getClientName());
@@ -104,7 +100,7 @@ class ClientControllerTest {
         assertEquals(realClient.getCreatedDate(), capturedClient.getCreatedDate());
         assertEquals(realClient.getUpdatedDate(), capturedClient.getUpdatedDate());
 
-        // Assert that the returned view name matches the expected value
+
         assertEquals("clients/show", viewName);
     }
 

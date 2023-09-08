@@ -130,15 +130,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> findClientsByName(String clientName) {
 
-        //Todo for restAPI
-//        List<Client> clients = clientRepository.findClientsByClientEmailEqualsIgnoreCase(clientEmail);
-//
-//        if (clients.isEmpty()) {
-//            log.warn("No clients found with email: {}", clientEmail);
-//            throw new NotFoundException("No clients found with email: " + clientEmail);
-//        }
-//
-//        return clients;
+
         return clientRepository.findClientsByClientNameEqualsIgnoreCase(clientName);
     }
 

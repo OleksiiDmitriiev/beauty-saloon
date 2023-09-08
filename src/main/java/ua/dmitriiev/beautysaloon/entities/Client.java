@@ -42,7 +42,6 @@ public class Client {
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Please enter valid email")
     @Column(name = "email", unique = true)
-//    @UniqueEmail
     private String clientEmail;
 
     @OneToMany(mappedBy = "clientOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

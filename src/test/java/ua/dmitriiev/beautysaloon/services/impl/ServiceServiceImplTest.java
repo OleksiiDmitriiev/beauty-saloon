@@ -1,6 +1,6 @@
 package ua.dmitriiev.beautysaloon.services.impl;
 
-import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,22 +39,22 @@ class ServiceServiceImplTest {
 
     @Test
     public void testListServices_ReturnsListOfServices() {
-        // Create test data
+
         List<Service> expectedServices = new ArrayList<>();
         expectedServices.add(new Service());
         expectedServices.add(new Service());
         expectedServices.add(new Service());
 
-        // Mock the behavior of serviceRepository
+
         when(serviceRepository.findAll()).thenReturn(expectedServices);
 
-        // Call listServices method
+
         List<Service> actualServices = serviceService.listServices();
 
-        // Verify that the serviceRepository method was called
+
         verify(serviceRepository, times(1)).findAll();
 
-        // Verify the content of the returned list
+
         assertEquals(expectedServices.size(), actualServices.size());
         assertEquals(expectedServices, actualServices);
     }
@@ -100,11 +100,9 @@ class ServiceServiceImplTest {
     }
 
 
-    //TODO REFACTOR CONTINUE
-
     @Test
     public void testSaveService_ValidService_Success() {
-        // Create a valid service
+
         Master existingMaster = new Master();
         existingMaster.setId(UUID.randomUUID());
 
@@ -113,22 +111,22 @@ class ServiceServiceImplTest {
         validService.setDescription("Description");
         validService.setMasterOwner(existingMaster);
 
-        // Call saveService method
+
         serviceService.saveService(validService);
 
-        // Verify that the serviceRepository method was called
+
         verify(serviceRepository, times(1)).save(validService);
     }
 
     @Test
     public void testSaveService_NullServiceData_ThrowsIllegalArgumentException() {
-        // Create a null service
+
         Service nullService = null;
 
-        // Call saveService method and assert exception
+
         assertThrows(IllegalArgumentException.class, () -> serviceService.saveService(nullService));
 
-        // Verify that the serviceRepository method was not called
+
         verify(serviceRepository, never()).save(nullService);
     }
 
@@ -138,15 +136,15 @@ class ServiceServiceImplTest {
         validService.setServiceName("Valid Service");
         validService.setDescription("Description");
 
-        // Set other required properties for the valid service
+
         Master masterOwner = new Master();
-        // Set properties for the masterOwner
+
 
         validService.setMasterOwner(masterOwner);
 
         serviceService.saveService(validService);
 
-        // Verify that save method of serviceRepository was called with validService
+
         verify(serviceRepository, times(1)).save(validService);
     }
 
@@ -154,18 +152,17 @@ class ServiceServiceImplTest {
     @Test
     public void testSaveServiceInvalidData() {
         Service invalidService = new Service();
-        // Do not set required properties
+
 
         try {
             serviceService.saveService(invalidService);
-            // Expect an exception to be thrown
+
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            // Verify that the exception was thrown
-            // (You can add more specific checks for the exception message if needed)
+
         }
 
-        // Verify that save method of serviceRepository was not called
+
         verify(serviceRepository, never()).save(invalidService);
     }
 
@@ -173,17 +170,17 @@ class ServiceServiceImplTest {
     @Test
     public void testUpdateServiceValidData() {
 
-        UUID id = UUID.randomUUID(); // Example ID
+        UUID id = UUID.randomUUID();
         Service existingService = new Service();
         existingService.setServiceName("Manicure");
         System.out.println("Existing name " + existingService.getServiceName());
-        // Set properties for the existingService
+
         existingService.setId(id);
 
         Service updatedService = new Service();
         updatedService.setServiceName("Pedicure");
         System.out.println("Name we want to give: " + updatedService.getServiceName());
-        // Set properties for the updatedService
+
 
         when(serviceRepository.findServiceById(id)).thenReturn(Optional.of(existingService));
 
@@ -191,41 +188,39 @@ class ServiceServiceImplTest {
         System.out.println("After update: " + existingService.getServiceName());
 
 
-        // Verify that save method of serviceRepository was called with the updated existingService
         verify(serviceRepository, times(1)).save(existingService);
     }
 
     @Test
     public void testUpdateServiceNotFound() {
-        UUID id = UUID.randomUUID(); // Example ID
+        UUID id = UUID.randomUUID();
         Service updatedService = new Service();
-        // Set properties for the updatedService
+
 
         when(serviceRepository.findServiceById(id)).thenReturn(Optional.empty());
 
         try {
             serviceService.updateService(id, updatedService);
-            // Expect an exception to be thrown
+
             fail("Expected NoSuchElementException");
         } catch (NoSuchElementException e) {
-            // Verify that the exception was thrown
-            // (You can add more specific checks for the exception message if needed)
+
         }
 
-        // Verify that save method of serviceRepository was not called
+
         verify(serviceRepository, never()).save(any());
     }
 
 
     @Test
     public void testDeleteServiceById() {
-        UUID idToDelete = UUID.randomUUID(); // Example ID
+        UUID idToDelete = UUID.randomUUID();
         Service service = new Service();
         service.setId(idToDelete);
 
         serviceService.deleteServiceById(idToDelete);
 
-        // Verify that deleteServiceById method of serviceRepository was called with the provided ID
+
         verify(serviceRepository, times(1)).deleteServiceById(idToDelete);
     }
 
@@ -235,7 +230,7 @@ class ServiceServiceImplTest {
         String serviceName = "Example Service Name";
 
         List<Service> mockServiceList = new ArrayList<>();
-        // Create and add mock Service objects to mockServiceList
+
         Service service1 = new Service();
         service1.setServiceName(serviceName);
         mockServiceList.add(service1);
@@ -252,23 +247,12 @@ class ServiceServiceImplTest {
 
         List<Service> result = serviceService.findServicesByName(serviceName);
 
-        // Verify that findServicesByServiceNameEqualsIgnoreCase method of serviceRepository was called with serviceName
+
         verify(serviceRepository, times(1)).findServicesByServiceNameEqualsIgnoreCase(serviceName);
 
-        // Compare the expected list size with the actual list size
+
         assertEquals(mockServiceList.size(), result.size());
     }
-
-//    @Test
-//    public void testFindServicesByNameNoResults() {
-//        String serviceName = "NonExistentService";
-//
-//        // Configure the mock to return an empty list when findServicesByServiceNameEqualsIgnoreCase is called
-//        when(serviceRepository.findServicesByServiceNameEqualsIgnoreCase(serviceName)).thenReturn(Collections.emptyList());
-//
-//        // Verify that NotFoundException is thrown when no results are found
-//        assertThrows(NotFoundException.class, () -> serviceService.findServicesByName(serviceName));
-//    }
 
 
     @Test
@@ -277,7 +261,7 @@ class ServiceServiceImplTest {
         int pageSize = 5;
 
         List<Service> mockServiceList = new ArrayList<>();
-        // Create and add mock Service objects to mockServiceList
+
 
         for (int i = 1; i <= 12; i++) {
             mockServiceList.add(new Service());
@@ -290,10 +274,10 @@ class ServiceServiceImplTest {
 
         Page<Service> result = serviceService.listAllServices(pageNumber, pageSize);
 
-        // Verify that findAll method of serviceRepository was called with the specified pageable
+
         verify(serviceRepository, times(1)).findAll(pageable);
 
-        // Compare the expected page content with the actual page content
+
         assertEquals(mockPage.getContent(), result.getContent());
     }
 
@@ -306,7 +290,7 @@ class ServiceServiceImplTest {
 
         assertThrows(ServiceListException.class, () -> serviceService.listAllServices(pageNumber, pageSize));
 
-        // Verify that findAll method of serviceRepository was called with the specified pageable
+
         verify(serviceRepository, times(1)).findAll(any(Pageable.class));
     }
 

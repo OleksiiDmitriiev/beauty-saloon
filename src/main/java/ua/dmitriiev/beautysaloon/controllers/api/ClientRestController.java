@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
@@ -28,21 +28,11 @@ public class ClientRestController {
     }
 
 
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<ClientDTO> listAllClients() {
-//        List<Client> clients = clientService.listClients();
-//        return salonMapper.clientsToClientsDto(clients);
-//    }
-
-
-
-
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public Page<ClientDTO> listAllClients(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
                                           @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        Page<Client> clients = clientService.listAllClients(pageNumber,pageSize);
+        Page<Client> clients = clientService.listAllClients(pageNumber, pageSize);
         return salonMapper.pageClientsToPageClientsDto(clients);
     }
 
@@ -68,24 +58,11 @@ public class ClientRestController {
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Client> saveClient(@RequestBody @Valid Client client) {
-//        Client client = salonMapper.clientDtoToClient(clientDTO);
 
         var saveResult = clientService.saveClient(client);
         return ResponseEntity.ok(saveResult);
     }
 
-
-//    @PatchMapping("/{id}")
-//
-//    public String updateClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult,
-//                               @PathVariable("id") UUID id) {
-//
-//        if (bindingResult.hasErrors())
-//            return "clients/edit";
-//
-//        clientService.updateClient(id, client);
-//        return "redirect:/clients";
-//    }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

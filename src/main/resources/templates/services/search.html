@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>BeautySaloon</title>
 
-    <!-- slider stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
 
-    <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="/css/responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <link href="/css/responsive.css" rel="stylesheet"/>
 
 
 </head>
 <body>
 <div class="hero_area">
-    <!-- header section strats -->
-    <div th:insert="samples/sample :: header"></div>
-    <!-- end header section -->
 
-    <!-- slider section -->
-    <!-- gallery section -->
+    <div th:insert="samples/sample :: header"></div>
+
     <section class="gallery_section layout_padding">
 
 
@@ -59,8 +57,8 @@
                                 <li th:each="service : ${services}">
                                     <a th:href="@{/services/{id}(id=${service.getId()})}"
                                        th:text="${'Service name :  ' + service.getServiceName()}">service</a>
-                                    <a  th:href="@{/masters/{id}(id=${service.getMasterOwner().getId()})}"
-                                        th:text="${'Service master:  ' + service.getMasterOwner().getMasterName()}">service</a>
+                                    <a th:href="@{/masters/{id}(id=${service.getMasterOwner().getId()})}"
+                                       th:text="${'Service master:  ' + service.getMasterOwner().getMasterName()}">service</a>
                                     <p>Rating: <span th:text="${service.getServiceRating()}"></span></p>
                                     Orders:
                                     <span th:each="order, iterStat : ${service.getOrders()}">
@@ -82,27 +80,18 @@
     </section>
 
 
-
-
-    <!-- info section -->
-
-
-    <!-- end slider section -->
 </div>
 
 <div th:insert="samples/sample :: info-section"></div>
 
-<!-- footer section -->
-<div th:insert="samples/sample :: footer"></div>
-<!-- footer section -->
 
-<!-- Javascript files -->
-<!-- jQuery -->
+<div th:insert="samples/sample :: footer"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- custom script -->
+
 <script src="/js/custom.js"></script>
 </body>
 </html>

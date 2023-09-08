@@ -2,7 +2,7 @@ package ua.dmitriiev.beautysaloon.services;
 
 import org.springframework.data.domain.Page;
 import ua.dmitriiev.beautysaloon.entities.Client;
-import ua.dmitriiev.beautysaloon.entities.Master;
+
 
 import java.util.List;
 import java.util.UUID;

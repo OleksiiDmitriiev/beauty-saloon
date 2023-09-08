@@ -21,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @Slf4j
-//@ExtendWith(MockitoExtension.class)
-//@SpringBootTest
 class MasterServiceImplTest {
 
 
@@ -40,22 +38,22 @@ class MasterServiceImplTest {
 
     @Test
     public void testListMasters_ReturnsListOfMasters() {
-        // Create test data
+
         List<Master> expectedMasters = new ArrayList<>();
         expectedMasters.add(new Master());
         expectedMasters.add(new Master());
         expectedMasters.add(new Master());
 
-        // Mock the behavior of masterRepository
+
         when(masterRepository.findAll()).thenReturn(expectedMasters);
 
-        // Call listMasters method
+
         List<Master> actualMasters = masterService.listMasters();
 
-        // Verify that the masterRepository method was called
+
         verify(masterRepository, times(1)).findAll();
 
-        // Verify the content of the returned list
+
         assertEquals(expectedMasters.size(), actualMasters.size());
         assertEquals(expectedMasters, actualMasters);
     }
@@ -212,8 +210,6 @@ class MasterServiceImplTest {
     }
 
 
-    //TODO REFACTOR
-
     @Test
     public void testUpdateMaster_NonExistingId_ThrowsNotFoundException() {
 
@@ -268,28 +264,26 @@ class MasterServiceImplTest {
 
     @Test
     public void testDeleteById_DeletesMaster() {
-        // Create a new Master instance with a specific ID
+
         UUID masterId = UUID.randomUUID();
         Master master = new Master();
         master.setId(masterId);
 
-        // Mock the behavior of masterRepository
         when(masterRepository.findMasterById(masterId)).thenReturn(Optional.of(master));
 
-        // Call deleteById method
         masterService.deleteById(masterId);
 
-        // Verify that the deleteMasterById method of masterRepository was called with the correct ID
+
         verify(masterRepository, times(1)).deleteMasterById(masterId);
     }
 
 
     @Test
     public void testFindMastersByName_ReturnsListOfMasters() {
-        // Create a test master name
+
         String testMasterName = "Test Master";
 
-        // Create a list of Master instances for the test
+
         Master master1 = new Master();
         master1.setMasterName(testMasterName);
 
@@ -299,22 +293,22 @@ class MasterServiceImplTest {
 
         List<Master> expectedMasters = Arrays.asList(master1, master2);
 
-        // Mock the behavior of masterRepository
+
         when(masterRepository.findMastersByMasterNameEqualsIgnoreCase(testMasterName)).thenReturn(expectedMasters);
 
-        // Call findMastersByName method
+
         List<Master> actualMasters = masterService.findMastersByName(testMasterName);
 
-        // Verify that the masterRepository method was called with the correct masterName
+
         verify(masterRepository, times(1)).findMastersByMasterNameEqualsIgnoreCase(testMasterName);
 
-        // Verify that the returned list matches the expected list
+
         assertEquals(expectedMasters, actualMasters);
     }
 
     @Test
     public void testListAllMasters_ReturnsPageOfMasters() {
-        // Create test data
+
         int pageNumber = 0;
         int pageSize = 5;
 
@@ -323,17 +317,17 @@ class MasterServiceImplTest {
             expectedMasters.add(new Master());
         }
 
-        // Mock the behavior of masterRepository
+
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "masterName"));
         when(masterRepository.findAll(pageable)).thenReturn(new PageImpl<>(expectedMasters, pageable, expectedMasters.size()));
 
-        // Call listAllMasters method
+
         Page<Master> actualPage = masterService.listAllMasters(pageNumber, pageSize);
 
-        // Verify that the masterRepository method was called with the correct pageable
+
         verify(masterRepository, times(1)).findAll(pageable);
 
-        // Verify the content of the returned Page
+
         assertEquals(expectedMasters.size(), actualPage.getTotalElements());
         assertEquals(expectedMasters, actualPage.getContent());
     }

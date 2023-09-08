@@ -14,8 +14,6 @@ public interface MasterService {
 
     Master findMasterById(UUID id);
 
-    //TODO Check
-//    public MasterDTO findMasterById(UUID id);
 
     Master findMasterByName(String masterName);
 
@@ -29,8 +27,7 @@ public interface MasterService {
 
     List<Master> findMastersByName(String masterName);
 
-    //TODO
-//    Page<Master> listAllMasters();
+
     Page<Master> listAllMasters(int pageNumber, int pageSize);
 
 

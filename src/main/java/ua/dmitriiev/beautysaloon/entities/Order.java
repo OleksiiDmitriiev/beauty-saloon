@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import ua.dmitriiev.beautysaloon.lib.OrderUtils;
 import ua.dmitriiev.beautysaloon.model.OrderStatus;
 
@@ -54,12 +52,10 @@ public class Order {
     private OrderStatus orderStatus = OrderStatus.SCHEDULED;
 
     @Column(name = "created_date")
-//    @CreatedDate
     @CreationTimestamp
     private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
-//    @LastModifiedDate
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 

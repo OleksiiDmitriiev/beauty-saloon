@@ -3,7 +3,6 @@ package ua.dmitriiev.beautysaloon.controllers;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniqueEmailException;
 import ua.dmitriiev.beautysaloon.lib.exceptions.NotUniquePhoneNumberException;
-import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.services.impl.ClientServiceImpl;
 
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller

@@ -1,223 +1,213 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
 
-  <title>BeautySaloon</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
-  <!-- Custom styles for this template -->
-  <link href=" css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+    <title>BeautySaloon</title>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+
+
+    <link href=" css/style.css" rel="stylesheet"/>
+
+    <link href="css/responsive.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="hero_area">
-  <!-- header section strats -->
-  <header class="header_section">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg custom_nav-container d-block">
-        <div class="main_nav_menu">
-          <div class="fk_width">
-            <div class="custom_menu-btn">
-              <button onclick="openNav()">
-                <span class="s-1"> </span>
-                <span class="s-2"> </span>
-                <span class="s-3"> </span>
-              </button>
-            </div>
-            <div id="myNav" class="overlay">
-              <div class="overlay-content">
-                <a class="" href="/">Home <span class="sr-only">(current)</span></a>
-                <a class="" href="/about">About </a>
-                <a class="" href="/masters">Masters </a>
-                <a class="" href="/services">Services </a>
 
-                <a class="" href="/blog">Blog </a>
-              </div>
-            </div>
-          </div>
-          <a class="navbar-brand" href="">
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container d-block">
+                <div class="main_nav_menu">
+                    <div class="fk_width">
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <span class="s-1"> </span>
+                                <span class="s-2"> </span>
+                                <span class="s-3"> </span>
+                            </button>
+                        </div>
+                        <div id="myNav" class="overlay">
+                            <div class="overlay-content">
+                                <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+                                <a class="" href="/about">About </a>
+                                <a class="" href="/masters">Masters </a>
+                                <a class="" href="/services">Services </a>
+
+                                <a class="" href="/blog">Blog </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" href="">
               <span>
                 BeautySaloon
               </span>
-          </a>
-          <div class="user_option">
-            <a href="/login">
-              login
-            </a>
-            <a th:href="@{/services/search}" class="btn nav_search-btn"></a>
-          </div>
+                    </a>
+                    <div class="user_option">
+                        <a href="/login">
+                            login
+                        </a>
+                        <a th:href="@{/services/search}" class="btn nav_search-btn"></a>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
-  </header>
-  <!-- end header section -->
+    </header>
 
-  <!-- slider section -->
-  <!-- gallery section -->
-  <section class="gallery_section layout_padding">
+    <section class="gallery_section layout_padding">
 
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5 ml-auto">
-          <div class="heading_container">
-            <h2>
-              Admin controller:
-            </h2>
-            <a class="" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="" href="/masters">Masters </a>
-            <a class="" href="/masters/new">new master </a>
-            <a class="" href="/services">Services </a>
-            <a class="" href="/services/new">new service </a>
-            <a class="" href="/orders">Orders </a>
-            <a class="" href="/orders/new">new order </a>
-            <a class="" href="/clients">Clients </a>
-            <a class="" href="/clients/new">new client </a>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ml-auto">
+                    <div class="heading_container">
+                        <h2>
+                            Admin controller:
+                        </h2>
+                        <a class="" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="" href="/masters">Masters </a>
+                        <a class="" href="/masters/new">new master </a>
+                        <a class="" href="/services">Services </a>
+                        <a class="" href="/services/new">new service </a>
+                        <a class="" href="/orders">Orders </a>
+                        <a class="" href="/orders/new">new order </a>
+                        <a class="" href="/clients">Clients </a>
+                        <a class="" href="/clients/new">new client </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- end gallery section -->
-
-    <!-- info section -->
-
-
-    <!-- end slider section -->
+    </section>
 </div>
 
+
 <section class="info_section ">
-  <div class="info_container layout_padding-top">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
-      </div>
-      <div class="info_main">
-        <div class="row">
-          <div class="col-md-4 col-lg-3">
-            <div class="info_contact ">
-              <a href="#" class="link-box">
-                <div class="img-box">
-                  <img src="images/location.png" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h6>
-                    Location
-                  </h6>
-                </div>
-              </a>
-              <a href="#" class="link-box">
-                <div class="img-box">
-                  <img src="images/mail.png" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h6>
-                    demo@gmail.com
-                  </h6>
-                </div>
-              </a>
-              <a href="#" class="link-box">
-                <div class="img-box">
-                  <img src="images/call.png" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h6>
-                    Call +01 1234567890
-                  </h6>
-                </div>
-              </a>
+    <div class="info_container layout_padding-top">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Contact Us
+                </h2>
             </div>
-          </div>
-          <div class="col-md-2 col-lg-3">
-            <div class="info_link-box">
-              <ul>
-                <li class=" ">
-                  <a class="" href="/">Home </a>
-                </li>
-                <li class="">
-                  <a class="" href="/about">About </a>
-                </li>
-                <li class="">
-                  <a class="" href="/masters">Masters</a>
-                </li>
-                <li class="">
-                  <a class="" href="/services">Services </a>
-                </li>
-                <li class="">
-                  <a class="" href="/blog">Blog</a>
-                </li>
-              </ul>
+            <div class="info_main">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="info_contact ">
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/location.png" alt=""/>
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        Location
+                                    </h6>
+                                </div>
+                            </a>
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/mail.png" alt=""/>
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        demo@gmail.com
+                                    </h6>
+                                </div>
+                            </a>
+                            <a href="#" class="link-box">
+                                <div class="img-box">
+                                    <img src="images/call.png" alt=""/>
+                                </div>
+                                <div class="detail-box">
+                                    <h6>
+                                        Call +01 1234567890
+                                    </h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-3">
+                        <div class="info_link-box">
+                            <ul>
+                                <li class=" ">
+                                    <a class="" href="/">Home </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/about">About </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/masters">Masters</a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/services">Services </a>
+                                </li>
+                                <li class="">
+                                    <a class="" href="/blog">Blog</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="info_form">
+                            <h5>
+                                <i>
+                                    For any query, contact us
+                                </i>
+                            </h5>
+                            <form action="#" method="post">
+                                <div>
+                                    <input type="text" placeholder="Name" required/>
+                                </div>
+                                <div>
+                                    <input type="email" placeholder="Email" required/>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Phone" required/>
+                                </div>
+                                <div>
+                                    <textarea placeholder="Message"></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit">
+                                        Send
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6 col-lg-6">
-            <div class="info_form">
-              <h5>
-                <i>
-                  For any query, contact us
-                </i>
-              </h5>
-              <form action="#" method="post">
-                <div>
-                  <input type="text" placeholder="Name" required />
-                </div>
-                <div>
-                  <input type="email" placeholder="Email" required />
-                </div>
-                <div>
-                  <input type="text" placeholder="Phone" required />
-                </div>
-                <div>
-                  <textarea placeholder="Message"></textarea>
-                </div>
-                <div class="mt-3">
-                  <button type="submit">
-                    Send
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- footer section -->
-<footer class="footer_section">
-  <div class="container">
-    <p>
-      &copy; 2023 All Rights Reserved. Design by
-      <a href="https://html.design/">HTML Design</a>
-    </p>
-  </div>
-</footer>
-<!-- footer section -->
 
-<!-- Javascript files -->
-<!-- jQuery -->
+<footer class="footer_section">
+    <div class="container">
+        <p>
+            &copy; 2023 All Rights Reserved. Design by
+            <a href="https://html.design/">HTML Design</a>
+        </p>
+    </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- custom script -->
+
 <script src="/js/custom.js"></script>
 </body>
 </html>

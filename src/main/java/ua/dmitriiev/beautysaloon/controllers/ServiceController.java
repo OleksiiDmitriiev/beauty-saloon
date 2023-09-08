@@ -33,12 +33,6 @@ public class ServiceController {
     }
 
 
-//    @GetMapping()
-//    public String index(Model model) {
-//        model.addAttribute("services", serviceService.findAll());
-//        return "services/index";
-//    }
-
     @GetMapping()
     public String listAllServices(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
@@ -53,8 +47,8 @@ public class ServiceController {
         model.addAttribute("services", services);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", servicePage.getTotalPages());
-        model.addAttribute("nextPage", pageNumber + 1); // Calculate the nextPage value
-        model.addAttribute("pageSize", pageSize); // Add thi
+        model.addAttribute("nextPage", pageNumber + 1);
+        model.addAttribute("pageSize", pageSize);
 
         return "services/index";
     }
@@ -73,11 +67,6 @@ public class ServiceController {
         model.addAttribute("allMasters", masterService.listMasters());
         return "services/new";
     }
-//    @GetMapping("/new")
-//    public String newService(@ModelAttribute("service") Service service) {
-//        model.addAttribute("services", serviceService.findAll());
-//        return "services/new";
-//    }
 
 
     @PostMapping()
@@ -125,7 +114,7 @@ public class ServiceController {
             bindingResult.rejectValue("masterOwner", "error.service", ex.getMessage());
             return "services/edit";
         }
-//        serviceService.update(id, service);
+
 
         return "redirect:/services";
     }

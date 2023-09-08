@@ -8,13 +8,10 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -58,12 +55,10 @@ public class Service {
     private Set<Order> orders = new HashSet<>();
 
     @Column(name = "created_date")
-//    @CreatedDate
     @CreationTimestamp
     private LocalDateTime createdDate;
 
     @Column(name = "updated_date")
-//    @LastModifiedDate
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 

@@ -6,15 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ua.dmitriiev.beautysaloon.entities.Client;
 import ua.dmitriiev.beautysaloon.entities.Order;
 import ua.dmitriiev.beautysaloon.mappers.SalonMapperImpl;
-import ua.dmitriiev.beautysaloon.model.ClientDTO;
 import ua.dmitriiev.beautysaloon.model.OrderDTO;
-import ua.dmitriiev.beautysaloon.model.OrderPostDTO;
 import ua.dmitriiev.beautysaloon.services.OrderService;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,7 +35,6 @@ public class OrderRestController {
     }
 
 
-    //TODO
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO getOrderByName(@RequestParam(required = false) String orderName) {
@@ -47,12 +42,6 @@ public class OrderRestController {
         return salonMapper.orderToOrderDto(order);
     }
 
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<OrderDTO> listAllOrders() {
-//        List<Order> orders = orderService.listOrders();
-//        return salonMapper.ordersToOrdersDto(orders);
-//    }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
@@ -79,8 +68,6 @@ public class OrderRestController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void updateOrderById(@PathVariable("id") UUID id, @Valid @RequestBody OrderDTO orderDTO) {
-
-//        Order order = salonMapper.orderPostDtoToOrder(orderDTO);
         Order order = salonMapper.orderDtoToOrder(orderDTO);
         orderService.updateOrder(id, order);
     }

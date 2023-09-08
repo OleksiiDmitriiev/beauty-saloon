@@ -429,32 +429,6 @@ public class SalonMapperImpl implements SalonMapper {
         return new PageImpl<>(orderSlimDTOList, orders.getPageable(), orders.getTotalElements());
     }
 
-    //TODO mapping
-
-
-//    public Order orderDtoToOrder(OrderDTO orderDTO) {
-//
-//        Order order = new Order();
-//
-//        order.setId(orderDTO.getId());
-//        order.setOrderName(orderDTO.getOrderName());
-//        order.setOrderStatus(orderDTO.getOrderStatus());
-//
-//        if (orderDTO.getServiceOwner() != null) {
-//            order.setServiceOwner(serviceSlimDtoToService(orderDTO.getServiceOwner()));
-//        }
-//
-//        if (orderDTO.getClientOwner() != null) {
-//            order.setClientOwner(clientSlimDtoToClient(orderDTO.getClientOwner()));
-//        }
-//
-//        order.setUpdatedDate(orderDTO.getUpdatedDate());
-//        order.setCreatedDate(orderDTO.getCreatedDate());
-//
-//
-//        return order;
-//    }
-
 
     @Override
     public Order orderPostDtoToOrder(OrderPostDTO orderPostDTO) {

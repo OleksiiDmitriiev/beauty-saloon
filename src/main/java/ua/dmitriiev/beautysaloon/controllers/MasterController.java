@@ -20,7 +20,6 @@ import java.util.UUID;
 @RequestMapping("/masters")
 public class MasterController {
 
-    //TODO change methods name
 
     private final MasterServiceImpl masterService;
 
@@ -31,16 +30,6 @@ public class MasterController {
         this.masterService = masterService;
     }
 
-//
-//    @GetMapping()
-//    public String listAllMasters(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-//                                 @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize, Model model) {
-////        model.addAttribute("masters", masterService.listMasters());
-//        Page<Master> masterPage = masterService.listAllMasters(pageNumber, pageSize);
-//        model.addAttribute("masters", masterPage);
-////        model.addAttribute("masters", masterService.listAllMasters());
-//        return "masters/index";
-//    }
 
     @GetMapping()
     public String listAllMasters(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
@@ -57,9 +46,9 @@ public class MasterController {
         model.addAttribute("masters", masters);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", masterPage.getTotalPages());
-        model.addAttribute("nextPage", pageNumber + 1); // Calculate the nextPage value
-//        model.addAttribute("nextPage", pageNumber + 1); // Calculate the nextPage value
-        model.addAttribute("pageSize", pageSize); // Add thi
+        model.addAttribute("nextPage", pageNumber + 1);
+
+        model.addAttribute("pageSize", pageSize);
 
         return "masters/index";
     }
@@ -69,7 +58,7 @@ public class MasterController {
     public String getMasterById(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("master", masterService.findMasterById(id));
 
-//        return "masters/show";
+
         return "masters/show";
     }
 
@@ -134,13 +123,7 @@ public class MasterController {
         return "redirect:/masters";
     }
 
-    //    @GetMapping("/search")
-//    public String getMasterByName(@RequestParam(required = false) String masterName, Model model) {
-//
-//        model.addAttribute("master", masterService.findMasterByName(masterName));
-//
-//        return "masters/search";
-//    }
+
     @GetMapping("/search")
     public String getMastersByName(@RequestParam(required = false) String masterName, Model model) {
 

@@ -114,7 +114,7 @@ public interface SalonMapper {
 
     List<OrderPostDTO> ordersToOrdersPostDto(List<Order> orders);
 
-    //
+
     Service servicePostDtoToService(ServicePostDTO servicePostDTO);
 
     ServicePostDTO serviceToServicePostDto(Service service);

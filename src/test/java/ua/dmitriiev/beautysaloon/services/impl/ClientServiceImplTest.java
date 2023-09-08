@@ -1,7 +1,6 @@
 package ua.dmitriiev.beautysaloon.services.impl;
 
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-//@ExtendWith(MockitoExtension.class)
-//@SpringBootTest
 class ClientServiceImplTest {
 
 
@@ -49,7 +46,7 @@ class ClientServiceImplTest {
 
     @Test
     public void testListClients() {
-        // Create some test data
+
         Client client1 = new Client();
         client1.setId(UUID.randomUUID());
         client1.setClientName("Client 1");
@@ -59,17 +56,16 @@ class ClientServiceImplTest {
 
         List<Client> clients = Arrays.asList(client1, client2);
 
-        // Mocking behavior of clientRepository
+
         when(clientRepository.findAll()).thenReturn(clients);
 
-        // Call the method to be tested
+
         List<Client> returnedClients = clientService.listClients();
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findAll();
 
-        // Add assertions to verify the correctness of the returnedClients list
-        // For example:
+
         assertEquals(2, returnedClients.size());
         assertEquals(client1.getId(), returnedClients.get(0).getId());
         assertEquals(client2.getId(), returnedClients.get(1).getId());
@@ -78,21 +74,21 @@ class ClientServiceImplTest {
 
     @Test
     public void testFindClientById() {
-        // Create a test UUID
+
         UUID clientId = UUID.randomUUID();
 
-        // Create a mock Client object
+
         Client client = new Client();
         client.setId(clientId);
         client.setClientName("Test Client");
 
-        // Mocking behavior of clientRepository
+
         when(clientRepository.findClientById(clientId)).thenReturn(Optional.of(client));
 
-        // Call the method to be tested
+
         Client returnedClient = clientService.findClientById(clientId);
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientById(clientId);
         assertNotNull(returnedClient);
         assertEquals(client.getId(), returnedClient.getId());
@@ -101,31 +97,31 @@ class ClientServiceImplTest {
 
     @Test
     public void testFindClientByIdNotFound() {
-        // Create a test UUID
+
         UUID clientId = UUID.randomUUID();
 
-        // Mocking behavior of clientRepository to return an empty Optional
+
         when(clientRepository.findClientById(clientId)).thenReturn(Optional.empty());
 
-        // Call the method to be tested and expect an exception
+
         assertThrows(NotFoundException.class, () -> clientService.findClientById(clientId));
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientById(clientId);
     }
 
 
     @Test
     public void testSaveClientInvalidDataNullName() {
-        // Create a test Client object with null name
+
         Client client = new Client();
         client.setPhoneNumber("1234567890");
         client.setClientEmail("test@example.com");
 
-        // Call the method to be tested and expect an IllegalArgumentException
+
         assertThrows(IllegalArgumentException.class, () -> clientService.saveClient(client));
 
-        // Verify the result
+
         verify(clientRepository, never()).findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         verify(clientRepository, never()).findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
         verify(clientRepository, never()).save(client);
@@ -133,15 +129,15 @@ class ClientServiceImplTest {
 
     @Test
     public void testSaveClientInvalidDataNullPhoneNumber() {
-        // Create a test Client object with null phone number
+
         Client client = new Client();
         client.setClientName("Test Client");
         client.setClientEmail("test@example.com");
 
-        // Call the method to be tested and expect an IllegalArgumentException
+
         assertThrows(IllegalArgumentException.class, () -> clientService.saveClient(client));
 
-        // Verify the result
+
         verify(clientRepository, never()).findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         verify(clientRepository, never()).findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
         verify(clientRepository, never()).save(client);
@@ -149,15 +145,15 @@ class ClientServiceImplTest {
 
     @Test
     public void testSaveClientInvalidDataNullEmail() {
-        // Create a test Client object with null email
+
         Client client = new Client();
         client.setClientName("Test Client");
         client.setPhoneNumber("1234567890");
 
-        // Call the method to be tested and expect an IllegalArgumentException
+
         assertThrows(IllegalArgumentException.class, () -> clientService.saveClient(client));
 
-        // Verify the result
+
         verify(clientRepository, never()).findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         verify(clientRepository, never()).findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
         verify(clientRepository, never()).save(client);
@@ -165,21 +161,21 @@ class ClientServiceImplTest {
 
     @Test
     public void testSaveClient() {
-        // Create a test Client object
+
         Client client = new Client();
         client.setClientName("Test Client");
         client.setPhoneNumber("1234567890");
         client.setClientEmail("test@example.com");
 
-        // Mocking behavior of clientRepository
+
         when(clientRepository.findClientByClientEmailEqualsIgnoreCase(client.getClientEmail())).thenReturn(null);
         when(clientRepository.findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber())).thenReturn(null);
         when(clientRepository.save(client)).thenReturn(client);
 
-        // Call the method to be tested
+
         Client savedClient = clientService.saveClient(client);
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         verify(clientRepository, times(1)).findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
         verify(clientRepository, times(1)).save(client);
@@ -202,20 +198,20 @@ class ClientServiceImplTest {
 
     @Test
     public void testSaveClientDuplicatePhoneNumber() {
-        // Create a test Client object with a duplicate phone number
+
         Client client = new Client();
         client.setClientName("Test Client");
         client.setPhoneNumber("1234567890");
         client.setClientEmail("test@example.com");
 
-        // Mocking behavior of clientRepository to return an existing client by phone number
+
         when(clientRepository.findClientByClientEmailEqualsIgnoreCase(client.getClientEmail())).thenReturn(null);
         when(clientRepository.findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber())).thenReturn(client);
 
-        // Call the method to be tested and expect a NotUniquePhoneNumberException
+
         assertThrows(NotUniquePhoneNumberException.class, () -> clientService.saveClient(client));
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientByClientEmailEqualsIgnoreCase(client.getClientEmail());
         verify(clientRepository, times(1)).findClientByPhoneNumberEqualsIgnoreCase(client.getPhoneNumber());
         verify(clientRepository, never()).save(client);
@@ -224,7 +220,7 @@ class ClientServiceImplTest {
 
     @Test
     public void testUpdateClient() {
-        // Create a test UUID and a mock updated client
+
         UUID clientId = UUID.randomUUID();
         Client updatedClient = new Client();
         updatedClient.setId(clientId);
@@ -232,49 +228,49 @@ class ClientServiceImplTest {
         updatedClient.setPhoneNumber("9876543210");
         updatedClient.setClientEmail("updated@example.com");
 
-        // Create a mock existing client to be updated
+
         Client existingClient = new Client();
         existingClient.setId(clientId);
         existingClient.setClientName("Existing Client");
         existingClient.setPhoneNumber("1234567890");
         existingClient.setClientEmail("existing@example.com");
 
-        // Mocking behavior of clientRepository
+
         when(clientRepository.findClientById(clientId)).thenReturn(Optional.of(existingClient));
         when(clientRepository.findClientByClientEmailEqualsIgnoreCase(updatedClient.getClientEmail())).thenReturn(null);
         when(clientRepository.findClientByPhoneNumberEqualsIgnoreCase(updatedClient.getPhoneNumber())).thenReturn(null);
 
-        // Call the method to be tested
+
         clientService.updateClient(clientId, updatedClient);
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientById(clientId);
         verify(clientRepository, times(1)).findClientByClientEmailEqualsIgnoreCase(updatedClient.getClientEmail());
         verify(clientRepository, times(1)).findClientByPhoneNumberEqualsIgnoreCase(updatedClient.getPhoneNumber());
         verify(clientRepository, times(1)).save(existingClient);
 
-        // Add assertions to verify that the existing client has been updated correctly
+
         assertEquals(updatedClient.getClientName(), existingClient.getClientName());
         assertEquals(updatedClient.getPhoneNumber(), existingClient.getPhoneNumber());
         assertEquals(updatedClient.getClientEmail(), existingClient.getClientEmail());
-        // ... add more assertions based on your test case
+
     }
 
     @Test
     public void testUpdateClientNotFound() {
-        // Create a test UUID and a mock updated client
+
         UUID clientId = UUID.randomUUID();
         Client updatedClient = new Client();
         updatedClient.setId(clientId);
         updatedClient.setClientName("Updated Client");
 
-        // Mocking behavior of clientRepository to return an empty Optional
+
         when(clientRepository.findClientById(clientId)).thenReturn(Optional.empty());
 
-        // Call the method to be tested and expect a NotFoundException
+
         assertThrows(NotFoundException.class, () -> clientService.updateClient(clientId, updatedClient));
 
-        // Verify the result
+
         verify(clientRepository, times(1)).findClientById(clientId);
         verify(clientRepository, never()).findClientByClientEmailEqualsIgnoreCase(any());
         verify(clientRepository, never()).findClientByPhoneNumberEqualsIgnoreCase(any());
@@ -324,18 +320,18 @@ class ClientServiceImplTest {
 
     @Test
     public void testDeleteById_DeletesClient() {
-        // Create a new Master instance with a specific ID
+
         UUID clientId = UUID.randomUUID();
         Client client = new Client();
         client.setId(clientId);
 
-        // Mock the behavior of masterRepository
+
         when(clientRepository.findClientById(clientId)).thenReturn(Optional.of(client));
 
-        // Call deleteById method
+
         clientService.deleteById(clientId);
 
-        // Verify that the deleteMasterById method of masterRepository was called with the correct ID
+
         verify(clientRepository, times(1)).deleteClientById(clientId);
     }
 
@@ -384,10 +380,10 @@ class ClientServiceImplTest {
 
     @Test
     public void testFindClientsByName_ReturnsListOfClients() {
-        // Create a test master name
+
         String testClientName = "Test Client";
 
-        // Create a list of Master instances for the test
+
         Client client1 = new Client();
         client1.setClientName(testClientName);
 
@@ -397,23 +393,23 @@ class ClientServiceImplTest {
 
         List<Client> expectedClients = Arrays.asList(client1, client2);
 
-        // Mock the behavior of masterRepository
+
         when(clientRepository.findClientsByClientNameEqualsIgnoreCase(testClientName)).thenReturn(expectedClients);
 
-        // Call findMastersByName method
+
         List<Client> actualClients = clientService.findClientsByName(testClientName);
 
-        // Verify that the masterRepository method was called with the correct masterName
+
         verify(clientRepository, times(1)).findClientsByClientNameEqualsIgnoreCase(testClientName);
 
-        // Verify that the returned list matches the expected list
+
         assertEquals(expectedClients, actualClients);
     }
 
 
     @Test
     public void testListAllClients_ReturnsPageOfClients() {
-        // Create test data
+
         int pageNumber = 0;
         int pageSize = 5;
 
@@ -422,17 +418,17 @@ class ClientServiceImplTest {
             expectedClients.add(new Client());
         }
 
-        // Mock the behavior of masterRepository
+
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "updatedDate"));
         when(clientRepository.findAll(pageable)).thenReturn(new PageImpl<>(expectedClients, pageable, expectedClients.size()));
 
-        // Call listAllMasters method
+
         Page<Client> actualPage = clientService.listAllClients(pageNumber, pageSize);
 
-        // Verify that the masterRepository method was called with the correct pageable
+
         verify(clientRepository, times(1)).findAll(pageable);
 
-        // Verify the content of the returned Page
+
         assertEquals(expectedClients.size(), actualPage.getTotalElements());
         assertEquals(expectedClients, actualPage.getContent());
     }
