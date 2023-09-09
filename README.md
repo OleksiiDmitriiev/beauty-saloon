@@ -29,5 +29,31 @@ Please note that this project is a personal endeavor, continually evolving and i
 - [Getting Started](#getting-started)
 
 
+## Technology Stack
+
+- **Java**: Version 17
+
+- **Spring Framework**: Version 6 (Spring Boot 3.0.5)
+
+- **Thymeleaf**: A modern server-side Java template engine for both web and standalone environments.
+
+- **PostgreSQL**: The chosen relational database management system.
+
+- **MapStruct**: Used for generating type-safe mapping code to map DTOs to entities and vice versa.
+
+- **ModelMapper**: A flexible, convention-based object mapping library for Java.
+
+- **Maven**: Our build tool of choice, Maven simplifies project management and dependency management. It's responsible for compiling, testing, packaging, and deploying our application, ensuring smooth development and deployment processes.
+
+### Supporting Libraries and Tools
+
+- **Lombok**: A library to reduce boilerplate code in Java classes.
+
+- **Mockito**: A testing framework for Java to create and configure mock objects.
+
+- **Jakarta Validation API**: Provides a mechanism for bean validation.
+  
+- **Spring Boot Validation**: Provides validation-related features for your Spring Boot application.
+
 
 
