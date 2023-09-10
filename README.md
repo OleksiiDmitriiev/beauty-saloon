@@ -56,4 +56,58 @@ Please note that this project is a personal endeavor, continually evolving and i
 - **Spring Boot Validation**: Provides validation-related features for your Spring Boot application.
 
 
+## Database Overview
 
+Our Beauty Saloon project employs a relational database to manage various aspects of our saloon business. Below is an overview of the key entities in our database, along with their descriptions and relationships.
+
+
+<div style="text-align:center;">
+  <img src="src/main/resources/static/images/uml-db-white.png" width="600px" alt="Database UML Diagram">
+</div>
+
+**Master Entity**
+- Description: Stores information about saloon masters, including their contact details and ratings.
+- Fields:
+  - `master_id` (uuid): A unique identifier for each master.
+  - `created_date` (timestamp): The date when the master record was created.
+  - `email` (varchar): The email address of the master (Constraints: Not null, Unique, Length 3-50).
+  - `name` (varchar): The name of the master (Constraints: Not null, Length 3-50).
+  - `master_rating` (integer): The rating of the master.
+  - `phone_number` (varchar): The phone number of the master (Constraints: Not null, Unique).
+  - `updated_date` (timestamp): The date when the master record was last updated.
+- Relationships: 1-to-1 with `service`.
+
+**Client Entity**
+- Description: Records data about saloon clients, including their contact details.
+- Fields:
+  - `client_id` (uuid): A unique identifier for each client.
+  - `email` (varchar): The email address of the client (Constraints: Not null, Unique, Length 3-50).
+  - `name` (varchar): The name of the client (Constraints: Not null, Length 3-50).
+  - `created_date` (timestamp): The date when the client record was created.
+  - `phone_number` (varchar): The phone number of the client (Constraints: Not null, Unique).
+  - `updated_date` (timestamp): The date when the client record was last updated.
+- Relationships: 1-to-1 with `order_table`.
+
+**Service Entity**
+- Description: Manages information about saloon services, including descriptions and ratings.
+- Fields:
+  - `service_id` (uuid): A unique identifier for each service.
+  - `created_date` (timestamp): The date when the service record was created.
+  - `description` (varchar): A description of the service (Constraints: Not null, Length 3-200).
+  - `name` (varchar): The name of the service (Constraints: Not null, Length 3-50).
+  - `service_rating` (integer): The rating of the service.
+  - `updated_date` (timestamp): The date when the service record was last updated.
+  - `master_id` (uuid): The identifier of the master associated with the service.
+- Relationships: 1-to-1 with `master`, 1-to-1 with `order_table`.
+
+**Order Entity**
+- Description: Tracks saloon orders made by clients, including order status.
+- Fields:
+  - `order_id` (uuid): A unique identifier for each order.
+  - `created_date` (timestamp): The date when the order record was created.
+  - `name` (varchar): The name of the order (Constraints: Not null, Length 3-50).
+  - `order_status` (varchar): The status of the order.
+  - `updated_date` (timestamp): The date when the order record was last updated.
+  - `client_id` (uuid): The identifier of the client associated with the order.
+  - `service_id` (uuid): The identifier of the service associated with the order.
+- Relationships: 1-to-1 with `client`, 1-to-1 with `service`.
