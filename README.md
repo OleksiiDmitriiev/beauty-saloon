@@ -35,13 +35,11 @@ Whether you're a salon professional looking to expand your client base or a clie
 
 Please note that this project is a personal endeavor, continually evolving and improving. We welcome your feedback and contributions to make **Beauty Saloon** even more delightful for its users.
 
-
-
 ## Navigation
 
 - [Technology Stack](#technology-stack)
-- [REST Endpoints](#rest-endpoints)
 - [Database Overview](#database-overview)
+- [REST Endpoints](#rest-endpoints)
 - [Getting Started](#getting-started)
 
 
@@ -70,6 +68,7 @@ Please note that this project is a personal endeavor, continually evolving and i
 - **Jakarta Validation API**: Provides a mechanism for bean validation.
   
 - **Spring Boot Validation**: Provides validation-related features for your Spring Boot application.
+
 
 
 ## Database Overview
@@ -127,6 +126,62 @@ Our Beauty Saloon project employs a PostgreSQL relational database to manage var
   - `client_id` (uuid): The identifier of the client associated with the order.
   - `service_id` (uuid): The identifier of the service associated with the order.
 - Relationships: 1-to-1 with `client`, 1-to-1 with `service`.
+
+## REST Endpoints
+
+Welcome to the RESTful API endpoints section of the Beauty Saloon project. This section provides details on the available API endpoints for managing various aspects of our salon business. These endpoints allow you to interact with salon orders, services, masters, and clients, making it easy to showcase your expertise, browse services, and make orders seamlessly.
+
+Below, you'll find a comprehensive list of the available endpoints, along with their descriptions and HTTP methods. Feel free to explore and utilize these endpoints to interact with the Beauty Saloon platform.
+You can easily interact with the API using tools like Postman.
+
+API Base URL: http://localhost:8080/api/v1
+### Orders
+API endpoints for managing salon orders.
+
+| HTTP Method | Endpoint             | Description                |
+|-------------|----------------------|----------------------------|
+| 🟢 GET      | /api/v1/orders/{id}  | Get order by ID             |
+| 🟠 PUT      | /api/v1/orders/{id}  | Update order by ID          |
+| 🔴 DELETE   | /api/v1/orders/{id}  | Delete order by ID          |
+| 🟢 GET      | /api/v1/orders       | Get a list of all orders    |
+| 🟡 POST     | /api/v1/orders       | Create a new order          |
+| 🟢 GET      | /api/v1/orders/search| Get order by name           |
+
+### Services
+API endpoints for managing salon services.
+
+| HTTP Method | Endpoint             | Description                |
+|-------------|----------------------|----------------------------|
+| 🟢 GET      | /api/v1/services/{id}| Get service by ID           |
+| 🟠 PUT      | /api/v1/services/{id}| Update service by ID        |
+| 🔴 DELETE   | /api/v1/services/{id}| Delete service by ID        |
+| 🟢 GET      | /api/v1/services     | Get a list of all services  |
+| 🟡 POST     | /api/v1/services     | Create a new service        |
+
+### Masters
+API endpoints for managing salon masters.
+
+| HTTP Method | Endpoint             | Description                |
+|-------------|----------------------|----------------------------|
+| 🟢 GET      | /api/v1/masters/{id} | Get master by ID            |
+| 🟠 PUT      | /api/v1/masters/{id} | Update master by ID         |
+| 🔴 DELETE   | /api/v1/masters/{id} | Delete master by ID         |
+| 🟡 POST     | /api/v1/masters/save | Create a new master         |
+| 🟢 GET      | /api/v1/masters      | Get a list of all masters   |
+| 🟢 GET      | /api/v1/masters/search| Get master by name          |
+
+### Clients
+API endpoints for managing salon clients.
+
+| HTTP Method | Endpoint             | Description                |
+|-------------|----------------------|----------------------------|
+| 🟢 GET      | /api/v1/clients/{id} | Get client by ID           |
+| 🟠 PUT      | /api/v1/clients/{id} | Update client by ID        |
+| 🔴 DELETE   | /api/v1/clients/{id} | Delete client by ID        |
+| 🟡 POST     | /api/v1/clients/save | Create a new client         |
+| 🟢 GET      | /api/v1/clients      | Get a list of all clients   |
+| 🟢 GET      | /api/v1/clients/search| Search for a client by name |
+
 
 ## Getting Started
 
