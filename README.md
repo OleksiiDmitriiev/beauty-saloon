@@ -58,7 +58,7 @@ Please note that this project is a personal endeavor, continually evolving and i
 
 ## Database Overview
 
-Our Beauty Saloon project employs a relational database to manage various aspects of our saloon business. Below is an overview of the key entities in our database, along with their descriptions and relationships.
+Our Beauty Saloon project employs a PostgreSQL relational database to manage various aspects of our saloon business. We are using PostgreSQL version 15.2. Below is an overview of the key entities in our database, along with their descriptions and relationships.
 
 
 <div style="text-align:center;">
