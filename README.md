@@ -134,7 +134,12 @@ Welcome to the RESTful API endpoints section of the Beauty Saloon project. This 
 Below, you'll find a comprehensive list of the available endpoints, along with their descriptions and HTTP methods. Feel free to explore and utilize these endpoints to interact with the Beauty Saloon platform.
 You can easily interact with the API using tools like Postman.
 
-API Base URL: http://localhost:8080/api/v1
+**API Documentation**: Full API documentation is available in both PDF and JSON formats:
+
+- [bs-api-documentation.pdf](bs-api-documentation.pdf)
+- [bs-documentation.json](bs-api-documentation.json)
+
+**API Base URL**: http://localhost:8080/api/v1
 ### Orders
 API endpoints for managing salon orders.
 
