@@ -111,3 +111,37 @@ Our Beauty Saloon project employs a PostgreSQL relational database to manage var
   - `client_id` (uuid): The identifier of the client associated with the order.
   - `service_id` (uuid): The identifier of the service associated with the order.
 - Relationships: 1-to-1 with `client`, 1-to-1 with `service`.
+
+## Getting Started
+
+Follow these steps to set up and run the Beauty Saloon project on your local machine.
+
+### Prerequisites
+
+- **Java Development Kit (JDK):** Ensure that you have JDK 17 or a compatible version installed on your system. You can download it from the official Oracle website or use a distribution like OpenJDK.
+
+- **PostgreSQL Database:** You need a PostgreSQL database to run this project. If you don't have PostgreSQL installed, download and install it from the official website: [PostgreSQL Downloads](https://www.postgresql.org/download/).
+
+### Clone the Repository
+
+First, clone the Beauty Saloon repository to your local machine:
+
+```bash
+https://github.com/OleksiiDmitriiev/beauty-saloon.git
+```
+
+### Database Setup
+
+1. **Create a PostgreSQL Database:**
+
+   Create a new PostgreSQL database for Beauty Saloon. You can do this using the `createdb` command or a PostgreSQL client like pgAdmin.
+
+2. **Restore the Database:**
+
+   Once the database is created, you'll need to restore the database schema and data from an SQL dump file. We've provided a sample SQL dump file (`beauty_saloon_db.sql`) in the project repository.
+
+   Use the following command to restore the database from the SQL dump file:
+
+   ```bash
+   psql -U postgres -d beauty_saloon_db -a -f beauty_saloon_db.sql
+   ```
