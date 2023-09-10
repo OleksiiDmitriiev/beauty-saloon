@@ -7,6 +7,18 @@
 
 ### Features
 
+#### Web Interface
+
+To access the web interface of Beauty Saloon, open your web browser and visit [http://localhost:8080/](http://localhost:8080/). Here, you can explore the user-friendly interface, browse saloon masters, saloon services and make orders for various saloon services.
+
+#### REST API
+
+The Beauty Saloon also provides a RESTful API for programmatic access to its features. You can use tools like Postman to interact with the API.
+
+- API Base URL: [http://localhost:8080/api/v1](http://localhost:8080/api/v1)
+
+Explore the API by sending HTTP requests to the available endpoints. Refer to the Swagger documentation or the section below for more details on available endpoints and usage.
+
 - **Masters' Profiles**: Salon masters can create detailed profiles, showcasing their skills, experience, and a portfolio of their work.
 
 - **Service Listings**: Masters can list their services, complete with descriptions, pricing, and availability.
