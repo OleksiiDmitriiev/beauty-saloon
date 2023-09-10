@@ -11,6 +11,10 @@
 
 To access the web interface of Beauty Saloon, open your web browser and visit [http://localhost:8080/](http://localhost:8080/). Here, you can explore the user-friendly interface, browse saloon masters, saloon services and make orders for various saloon services.
 
+<div style="text-align:center;">
+  <img src="src/main/resources/static/images/interface-preview.JPG" width="1000px" alt="Database UML Diagram">
+</div>
+
 #### REST API
 
 The Beauty Saloon also provides a RESTful API for programmatic access to its features. You can use tools like Postman to interact with the API.
