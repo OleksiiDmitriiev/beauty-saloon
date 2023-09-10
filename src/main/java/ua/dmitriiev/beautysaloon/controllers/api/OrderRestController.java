@@ -1,6 +1,8 @@
 package ua.dmitriiev.beautysaloon.controllers.api;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/orders")
+@Tag(name = "Orders", description = "API endpoints for managing saloon orders")
 public class OrderRestController {
 
     private final OrderService orderService;
@@ -28,6 +31,8 @@ public class OrderRestController {
 
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get order by ID",
+            description = "Retrieve an order by unique ID.")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO getOrderById(@PathVariable("id") UUID id) {
         Order order = orderService.findOrderById(id);
@@ -36,6 +41,8 @@ public class OrderRestController {
 
 
     @GetMapping("/search")
+    @Operation(summary = "Get order by name",
+            description = "Retrieve an order by name.")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO getOrderByName(@RequestParam(required = false) String orderName) {
         Order order = orderService.findOrderByName(orderName);
@@ -44,6 +51,8 @@ public class OrderRestController {
 
 
     @GetMapping()
+    @Operation(summary = "Get a list of all orders",
+            description = "Retrieve a paginated list of saloon orders.")
     @ResponseStatus(HttpStatus.OK)
     public Page<OrderDTO> listAllOrders(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
                                         @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
@@ -52,6 +61,8 @@ public class OrderRestController {
     }
 
     @PostMapping()
+    @Operation(summary = "Create a new order",
+            description = "Create a new order.")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveOrder(@RequestBody @Valid OrderDTO orderDTO) {
         Order order = salonMapper.orderDtoToOrder(orderDTO);
@@ -59,6 +70,8 @@ public class OrderRestController {
     }
 
     @DeleteMapping({"/{id}"})
+    @Operation(summary = "Delete order by ID",
+            description = "Delete order by ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrderById(@PathVariable("id") UUID id) {
 
@@ -66,6 +79,8 @@ public class OrderRestController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update order by ID",
+            description = "Update order by ID")
     @ResponseStatus(HttpStatus.OK)
     public void updateOrderById(@PathVariable("id") UUID id, @Valid @RequestBody OrderDTO orderDTO) {
         Order order = salonMapper.orderDtoToOrder(orderDTO);
